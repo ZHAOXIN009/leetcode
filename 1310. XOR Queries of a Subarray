@@ -1,0 +1,23 @@
+
+```
+brute force:
+class Solution {
+public:
+    vector<int> xorQueries(vector<int>& arr, vector<vector<int>>& queries) {
+        vector<int>res;
+        for(vector<int>temp: queries){
+            int curr=arr[temp[0]];
+            int left=temp[0];
+            int right=temp[1];
+            while(left<right){
+                curr=curr^arr[right];
+                right--;
+            }
+            res.push_back(curr);
+        }
+        return res;
+    }
+};
+```
+Runtime: 1688 ms, faster than 6.32% of C++ online submissions for XOR Queries of a Subarray.
+Memory Usage: 28.8 MB, less than 100.00% of C++ online submissions for XOR Queries of a Subarray.
