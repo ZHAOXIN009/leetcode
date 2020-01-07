@@ -1,0 +1,27 @@
+其实就是层次遍历
+
+```
+class Solution {
+public:
+    int deepestLeavesSum(TreeNode* root) {
+        queue<TreeNode*>queue;
+        int res=0;
+        queue.push(root);
+        while(!queue.empty()){
+            res=0;
+            int n=queue.size();
+            while(n!=0){
+                n--;
+                TreeNode* curr=queue.front();
+                res+=curr->val;
+                if(curr->left) queue.push(curr->left);
+                if(curr->right) queue.push(curr->right);
+                queue.pop();
+            }
+        }
+        return res;
+    }
+};
+```
+Runtime: 40 ms, faster than 96.43% of C++ online submissions for Deepest Leaves Sum.
+Memory Usage: 32 MB, less than 100.00% of C++ online submissions for Deepest Leaves Sum.
