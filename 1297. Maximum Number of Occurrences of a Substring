@@ -1,0 +1,38 @@
+两个点：
+1 只需要minSize 就行
+2 maxLetters 是指26个字符独立出现过吗，
+```
+class Solution {
+public:
+    int maxFreq(string s, int maxLetters, int minSize, int maxSize) {
+        int res=0;
+        unordered_map<string,int>map;
+        int left=0;
+        while(left+minSize-1<s.size()){
+            string temp=s.substr(left,minSize);
+            
+            char A[26]={0};
+            int count=0;
+            for(char p: temp){
+                if(A[p-'a']==0){
+                    A[p-'a']++;
+                    count++;
+                }
+                
+            }
+            
+            if(count>maxLetters){
+                left++;
+            }
+            else{
+                map[temp]++;
+                if(map[temp]>res){
+                    res=map[temp];
+                }
+                left++;
+            }
+        }
+        return res;
+    }
+};
+```
