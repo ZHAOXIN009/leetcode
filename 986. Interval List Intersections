@@ -1,0 +1,35 @@
+```
+class Solution {
+
+public:
+    vector<vector<int>> intervalIntersection(vector<vector<int>>& A, vector<vector<int>>& B) {
+        vector<vector<int>>res;
+        int i=0,j=0;
+        int leftA,leftB,rightA,rightB;
+        while(i<A.size()&&j<B.size()){
+            leftA=A[i][0];
+            rightA=A[i][1];
+            leftB=B[j][0];
+            rightB=B[j][1];
+            if(rightB<leftA){
+                j++;
+            }
+            else if(rightA<leftB){
+                i++;
+            }
+            else{
+                res.push_back({max(leftA,leftB),min(rightA,rightB)});
+                if(rightA<rightB){
+                    i++;
+                }
+                else{
+                    j++;
+                }
+            }
+        }
+        return res;
+    }
+};
+```
+Runtime: 48 ms, faster than 91.47% of C++ online submissions for Interval List Intersections.
+Memory Usage: 15.7 MB, less than 100.00% of C++ online submissions for Interval List Intersections.
