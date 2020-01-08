@@ -1,0 +1,35 @@
+```
+class Solution {
+public:
+    bool helper(string s, int left, int right){
+        while(left<=right){
+            if(s[left]==s[right]){
+                left++;
+                right--;
+            }
+            else{
+                return false;
+            }
+            
+        }
+        return true;
+    }
+    
+    bool validPalindrome(string s) {
+        if(s.size()==0) return true;
+        int left=0, right=s.size()-1;
+        while(left<=right){
+            if(s[left]==s[right]){
+                left++;
+                right--;
+            }
+            else{
+                return helper(s,left+1,right)||helper(s,left,right-1);
+            }
+        }
+        return true;
+    }
+};
+```
+Runtime: 108 ms, faster than 56.73% of C++ online submissions for Valid Palindrome II.
+Memory Usage: 26.1 MB, less than 18.18% of C++ online submissions for Valid Palindrome II.
