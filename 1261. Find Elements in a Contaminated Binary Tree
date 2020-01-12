@@ -1,0 +1,23 @@
+Runtime: 32 ms, faster than 95.84% of C++ online submissions for Find Elements in a Contaminated Binary Tree.
+Memory Usage: 30 MB, less than 100.00% of C++ online submissions for Find Elements in a Contaminated Binary Tree.
+```
+class FindElements {
+public:
+    unordered_set<int>set;
+    void recover(TreeNode* root, int x){
+        if(root==NULL) return ;
+        root->val=x;
+        set.insert(x);
+        recover(root->left,2*x+1);
+        recover(root->right,2*x+2);
+    }
+    FindElements(TreeNode* root) {
+        recover(root,0);
+    }
+    
+    bool find(int target) {
+        return set.find(target)!=set.end();
+    }
+};
+
+```
