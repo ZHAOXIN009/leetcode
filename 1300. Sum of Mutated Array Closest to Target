@@ -1,0 +1,44 @@
+Runtime: 12 ms, faster than 99.52% of C++ online submissions for Sum of Mutated Array Closest to Target.
+Memory Usage: 9.4 MB, less than 100.00% of C++ online submissions for Sum of Mutated Array Closest to Target.
+```
+class Solution {
+public:
+    int findBestValue(vector<int>& arr, int target) {
+        int res=0;
+        int differ=INT_MAX;
+        int left=0;
+        int right=INT_MIN;
+        for(int i=0; i<arr.size();++i){
+            
+            right=max(right,arr[i]);
+            
+        }
+        while(left<=right){
+            int mid=(left+right)/2;
+            int sum=0;
+            for(int temp: arr){
+                int curr=temp>mid?mid:temp;
+                sum+=curr;
+            }
+            if(abs(sum-target)<differ){
+                res=mid;
+                differ=abs(sum-target);
+                
+            }
+            if(abs(sum-target)==differ){
+                res=min(res,mid);
+            }
+            if(sum>target){
+                right=mid-1;
+            }
+            else if(sum==target){
+                right--;
+            }
+            else{
+                left=mid+1;
+            }
+        }
+        return res;
+    }
+};
+```
