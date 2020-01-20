@@ -1,0 +1,29 @@
+Runtime: 284 ms, faster than 40.71% of C++ online submissions for K Closest Points to Origin.
+Memory Usage: 52.8 MB, less than 28.13% of C++ online submissions for K Closest Points to Origin.
+```
+class Solution {
+    
+    class comp{
+        public:
+        bool operator()(vector<int>&x,vector<int>&y){
+            return x[0]*x[0]+x[1]*x[1]>y[0]*y[0]+y[1]*y[1];
+        }
+    };
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int K) {
+        vector<vector<int>>res;
+        priority_queue <vector<int>, vector<vector<int>>, comp> myQueue;
+        for(vector<int>&temp: points){
+            myQueue.push(temp);
+        }
+        while(K!=0){
+            K--;
+            res.push_back(myQueue.top());
+            myQueue.pop();
+        }
+        return res;
+    }
+};
+```
+
+妈的，一定要注意：class 里的默认是private！！！！！！！！！！！private
