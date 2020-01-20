@@ -1,0 +1,32 @@
+Runtime: 16 ms, faster than 82.62% of C++ online submissions for Top K Frequent Words.
+Memory Usage: 11.7 MB, less than 44.44% of C++ online submissions for Top K Frequent Words.
+```
+class Solution {
+    class comp {
+public:
+    bool operator()(pair<string, int> i, pair<string, int>j) {
+        return (i.second==j.second)? i.first>j.first: i.second<j.second;
+    }
+};
+    
+public:
+    vector<string> topKFrequent(vector<string>& words, int k) {
+        vector<string>res;
+        unordered_map<string, int>map;
+        priority_queue<pair<string,int>,vector<pair<string,int>>,comp>queue;
+        for(auto temp: words){
+            map[temp]++;
+        }
+        for(auto temp: map){
+            queue.push(make_pair(temp.first,temp.second));
+        }
+        while(k!=0){
+            k--;
+            res.push_back(queue.top().first);
+            queue.pop();
+            
+        }
+        return res;
+    }
+};
+```
