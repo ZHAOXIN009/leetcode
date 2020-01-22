@@ -1,0 +1,53 @@
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Reorganize String.
+Memory Usage: 8.4 MB, less than 100.00% of C++ online submissions for Reorganize String.
+```
+class Solution {
+public:
+    class comp{
+      public:
+        bool operator()(pair<char,int>x, pair<char,int>y){
+            return x.second<=y.second;
+        }
+    };
+    string reorganizeString(string S) {
+        string res;
+        priority_queue<pair<char,int>, vector<pair<char,int>>, comp>queue;
+        vector<int>helper(26,0);
+        for(char temp: S){
+            helper[temp-'a']++;
+        }
+        for(int i=0; i<26; ++i){
+            if(helper[i]>(S.size()+1)/2){
+                return res;
+            }
+            if(helper[i]>0)
+            {queue.push({i+'a',helper[i]});}
+        }
+        
+        while(!queue.empty()){
+            char curr1=queue.top().first;
+            int time1=queue.top().second-1;
+            queue.pop();
+            res+=curr1;
+            if(!queue.empty()){
+                char curr2=queue.top().first;
+                int time2=queue.top().second-1;
+                res+=curr2;
+                queue.pop();
+                if(time2>0){
+                    queue.push({curr2,time2});
+                }
+            }
+            if(time1>0){
+                queue.push({curr1,time1});
+            }
+        }
+        /*for(int i=1; i<res.size(); ++i){
+            if(res[i]==res[i-1]){
+                return "";
+            }
+        }*/
+        return res;
+    }
+};
+```
