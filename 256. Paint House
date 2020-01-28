@@ -1,0 +1,26 @@
+```
+class Solution {
+public:
+    int minCost(vector<vector<int>>& costs) {
+        if(costs.empty())return 0;
+        for(int i=1; i<costs.size(); ++i){
+            for(int j=0; j<3; ++j){
+                int mincost=INT_MAX;
+                for(int k=0; k<3; ++k){
+                    if(j==k)continue;
+                    mincost=min(mincost, costs[i-1][k]);
+                }
+                costs[i][j]+=mincost;
+            }
+        }
+        int bottom=costs.size()-1;
+        int res=INT_MAX;
+        for(int i=0 ; i<3; ++i){
+            res=min(res,costs[bottom][i]);
+        }
+        return res;
+    }
+};
+```
+Runtime: 4 ms, faster than 96.93% of C++ online submissions for Paint House.
+Memory Usage: 9.6 MB, less than 100.00% of C++ online submissions for Paint House.
