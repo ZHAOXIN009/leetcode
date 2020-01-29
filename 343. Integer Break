@@ -1,0 +1,20 @@
+```
+class Solution {
+public:
+    int integerBreak(int n) {
+        vector<int>helper(n+1,0);
+        helper[1]=0;
+        helper[2]=1;
+        for(int i=3; i<=n; ++i){
+            for(int j=1; j<=i/2;++j){
+                int left=max(j,helper[j]);
+                int right=max(i-j,helper[i-j]);
+                helper[i]=max(helper[i],left*right);
+            }
+        }
+        return helper[n];
+    }
+};
+```
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Integer Break.
+Memory Usage: 8.4 MB, less than 93.33% of C++ online submissions for Integer Break.
