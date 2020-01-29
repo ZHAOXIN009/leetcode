@@ -1,0 +1,25 @@
+```
+class Solution {
+public:
+    vector<vector<int>> matrixBlockSum(vector<vector<int>>& mat, int K) {
+        int m=mat.size();
+        int n=mat[0].size();
+        vector<vector<int>>helper(m+1,vector<int>(n+1,0));
+        for(int i=1; i<m+1;++i){
+            for(int j=1; j<n+1;++j){
+                helper[i][j]=helper[i-1][j]+helper[i][j-1]-helper[i-1][j-1]+mat[i-1][j-1];
+            }
+        }
+        vector<vector<int>>res(m,vector<int>(n));
+        for(int i=0; i<m; ++i){
+            for(int j=0; j<n; ++j){
+                int r1=max(0,i-K), c1=max(0,j-K), r2=min(m,i+K+1),c2=min(n,j+K+1);
+                res[i][j]=helper[r2][c2]-helper[r1][c2]-helper[r2][c1]+helper[r1][c1];
+            }
+        }
+        return res;
+    }
+};
+```
+Runtime: 28 ms, faster than 79.70% of C++ online submissions for Matrix Block Sum.
+Memory Usage: 11.6 MB, less than 100.00% of C++ online submissions for Matrix Block Sum.
