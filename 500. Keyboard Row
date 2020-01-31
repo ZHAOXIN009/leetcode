@@ -1,0 +1,52 @@
+```
+class Solution {
+public:
+    vector<string> findWords(vector<string>& words) {
+        unordered_set<char>set1={'Q','W','E','R','T','Y','U','I','O','P','q','w','e','r','t','y','u','i','o','p'},
+        set2={'A','S','D','F','G','H','J','K','L','a','s','d','f','g','h','j','k','l'},
+        set3={'Z','X','C','V','B','N','M','z','x','c','v','b','n','m'};
+        
+        vector<string>res;
+        for(string temp:words){
+            bool cantype=true;
+            if(set1.find(temp[0])!=set1.end()){
+                for(char t: temp){
+                    if(set1.find(t)==set1.end()){
+                        cantype=false;
+                        break;
+                    }
+                }
+                if(cantype){
+                    res.push_back(temp);
+                }
+            }
+            else if(set2.find(temp[0])!=set2.end()){
+                for(char t: temp){
+                    if(set2.find(t)==set2.end()){
+                        cantype=false;
+                        break;
+                    }
+                }
+                if(cantype){
+                    res.push_back(temp);
+                }
+            }
+            else{
+                 for(char t: temp){
+                    if(set3.find(t)==set3.end()){
+                        cantype=false;
+                        break;
+                    }
+                }
+                if(cantype){
+                    res.push_back(temp);
+                }
+            }
+            
+        }
+        return res;
+    }
+};
+```
+Runtime: 4 ms, faster than 60.28% of C++ online submissions for Keyboard Row.
+Memory Usage: 8.6 MB, less than 57.14% of C++ online submissions for Keyboard Row.
