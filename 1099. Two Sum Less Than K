@@ -1,0 +1,24 @@
+```
+class Solution {
+public:
+    int twoSumLessThanK(vector<int>& A, int K) {
+        int res=INT_MIN;
+        sort(A.begin(),A.end());
+        int left=0,right=A.size()-1;
+        while(left<right){
+            if(A[left]+A[right]>=K){
+                right--;
+            }
+            else{
+                res=max(res,A[left]+A[right]);
+                left++;
+            }
+            
+        }
+        if(res==INT_MIN)return-1;
+        return res;
+    }
+};
+```
+Runtime: 4 ms, faster than 87.51% of C++ online submissions for Two Sum Less Than K.
+Memory Usage: 8.3 MB, less than 100.00% of C++ online submissions for Two Sum Less Than K.
