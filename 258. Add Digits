@@ -1,0 +1,16 @@
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Add Digits.
+Memory Usage: 8.2 MB, less than 100.00% of C++ online submissions for Add Digits.
+```
+class Solution {
+public:
+    int addDigits(int num) {
+        if(num<10)return num;
+        int res=0;
+        while(num!=0){
+            res+=num%10;
+            num/=10;
+        }
+        return addDigits(res);
+    }
+};
+```
