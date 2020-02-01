@@ -1,0 +1,22 @@
+Runtime: 4 ms, faster than 92.04% of C++ online submissions for Maximum Number of Balloons.
+Memory Usage: 8.9 MB, less than 100.00% of C++ online submissions for Maximum Number of Balloons.
+```
+class Solution {
+public:
+    int maxNumberOfBalloons(string text) {
+        unordered_map<char,int>map={{'b',0},{'a',0},{'l',0},{'o',0},{'n',0}};
+        for(char temp: text){
+            if(temp=='b'||temp=='a'||temp=='l'||temp=='o'||temp=='n'){
+                map[temp]++;
+            }
+        }
+        map['l']/=2;
+        map['o']/=2;
+        int res=INT_MAX;
+        for(auto temp:map){
+            res=min(res,temp.second);
+        }
+        return res;
+    }
+};
+```
