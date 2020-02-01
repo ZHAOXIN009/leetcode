@@ -1,0 +1,24 @@
+Runtime: 28 ms, faster than 64.16% of C++ online submissions for Find Pivot Index.
+Memory Usage: 10.6 MB, less than 9.52% of C++ online submissions for Find Pivot Index.
+```
+class Solution {
+public:
+    int pivotIndex(vector<int>& nums) {
+        if(nums.empty())return -1;
+        if(nums.size()==1)return 0;
+        int left=0;
+        int right=0;
+        for(int temp: nums){
+            right+=temp;
+        }
+        right=right-nums[0];
+        nums.push_back(0);
+        for(int i=0; i<nums.size()-1;++i){
+            if(left==right)return i;  
+            left+=nums[i];
+            right=right-nums[i+1];
+        }
+        return -1;
+    }
+};
+```
