@@ -1,0 +1,18 @@
+Runtime: 4 ms, faster than 70.56% of C++ online submissions for Minimum Distance Between BST Nodes.
+Memory Usage: 10.8 MB, less than 100.00% of C++ online submissions for Minimum Distance Between BST Nodes.
+```
+class Solution {
+public:
+     int res=INT_MAX;
+    int oldnum=-1;
+    int minDiffInBST(TreeNode* root) {
+        if(root==NULL) return -1;
+        minDiffInBST(root->left);
+        if(oldnum!=-1)
+        res=min(res,abs(root->val-oldnum));
+        oldnum=root->val;
+        minDiffInBST(root->right);
+        return res;
+    }
+};
+```
