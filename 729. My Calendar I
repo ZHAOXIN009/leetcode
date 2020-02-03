@@ -1,0 +1,31 @@
+first try 
+brute force
+Runtime: 1644 ms, faster than 5.05% of C++ online submissions for My Calendar I.
+Memory Usage: 427 MB, less than 16.67% of C++ online submissions for My Calendar I.
+```
+class MyCalendar {
+public:
+    vector<vector<int>>helper;
+    MyCalendar() {
+        
+    }
+    
+    bool book(int start, int end) {
+        if(helper.empty()){
+            helper.push_back({start,end});
+            return true;
+        }
+        else{
+            for(vector<int>temp: helper){
+                if(max(temp[0],start)<min(temp[1],end)){
+                    return false;
+                }
+                
+            }
+            helper.push_back({start,end});
+            return true;
+        }
+    }
+};
+
+```
