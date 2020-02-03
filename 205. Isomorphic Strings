@@ -1,0 +1,26 @@
+Runtime: 8 ms, faster than 88.25% of C++ online submissions for Isomorphic Strings.
+Memory Usage: 9.3 MB, less than 60.00% of C++ online submissions for Isomorphic Strings.
+```
+class Solution {
+public:
+    bool isIsomorphic(string s, string t) {
+       
+        unordered_map<char,char>map;
+        unordered_set<char>set;
+        for(int i=0; i<s.size();++i){
+            
+            if(map.find(s[i])==map.end()){
+                if(set.find(t[i])!=set.end())return false;
+                map[s[i]]=t[i];
+                set.insert(t[i]);
+            }
+            else{
+                if(map[s[i]]!=t[i])return false;
+            }
+            
+            
+        }
+        return true;
+    }
+};
+```
