@@ -1,0 +1,25 @@
+Runtime: 12 ms, faster than 23.19% of C++ online submissions for Maximize Sum Of Array After K Negations.
+Memory Usage: 8.8 MB, less than 50.00% of C++ online submissions for Maximize Sum Of Array After K Negations.
+```
+class Solution {
+public:
+    int largestSumAfterKNegations(vector<int>& A, int K) {
+        int res=0;
+        priority_queue<int,vector<int>,greater<int>>pq;
+        for(int a:A){
+            pq.push(a);
+        }
+        while(K!=0){
+            K--;
+            int temp=pq.top();
+            pq.pop();
+            pq.push(-temp);
+        }
+        while(!pq.empty()){
+            res+=pq.top();
+            pq.pop();
+        }
+        return res;
+    }
+};
+```
