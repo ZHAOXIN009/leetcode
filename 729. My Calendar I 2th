@@ -1,0 +1,21 @@
+Runtime: 100 ms, faster than 89.28% of C++ online submissions for My Calendar I.
+Memory Usage: 36 MB, less than 16.67% of C++ online submissions for My Calendar I.
+```
+class MyCalendar {
+public:
+    map<int,int>map1;
+    MyCalendar() {
+        
+    }
+    
+    bool book(int start, int end) {
+        auto temp=map1.lower_bound(start);
+        if(temp!=map1.end()&&temp->first<end)return false;
+        if(temp!=map1.begin()&&(--temp)->second>start)return false;
+        
+        map1[start]=end;
+        return true;
+        
+    }
+};
+```
