@@ -1,0 +1,50 @@
+Runtime: 12 ms, faster than 39.27% of C++ online submissions for Third Maximum Number.
+Memory Usage: 10.9 MB, less than 23.08% of C++ online submissions for Third Maximum Number.
+```
+class Solution {
+public:
+    int thirdMax(vector<int>& nums) {
+       
+        priority_queue<int,vector<int>>queue;
+        unordered_set<int>set;
+        for(int i: nums){
+            if(set.find(i)==set.end())
+            queue.push(i);
+            set.insert(i);
+        }
+        if(queue.size()<3){
+            return queue.top();
+        }
+        int k=0,res=0;
+        while(k!=3){
+            k++;
+            res=queue.top();
+            queue.pop();
+        }
+        return res;
+    }
+};
+```
+
+
+using set!
+Runtime: 8 ms, faster than 78.22% of C++ online submissions for Third Maximum Number.
+Memory Usage: 10.6 MB, less than 46.15% of C++ online submissions for Third Maximum Number.
+```
+class Solution {
+public:
+    int thirdMax(vector<int>& nums) {
+        set<int>set1;
+        for(int i: nums){
+            if(set1.find(i)==set1.end()){
+                set1.insert(i);
+            }
+            if(set1.size()>3){
+                set1.erase(set1.begin());
+            }
+        }
+        return set1.size()==3?*set1.begin():*set1.rbegin();
+        
+    }
+};
+```
