@@ -1,0 +1,20 @@
+Runtime: 20 ms, faster than 63.48% of C++ online submissions for House Robber III.
+Memory Usage: 28.2 MB, less than 11.11% of C++ online submissions for House Robber III.
+```
+class Solution {
+public:
+    vector<int>subrob(TreeNode*root){
+        if(root==NULL)return vector<int>(2,0);
+        vector<int>res(2,0);
+        vector<int>left=subrob(root->left);
+        vector<int>right=subrob(root->right);
+        res[0]=max(left[0],left[1])+max(right[0],right[1]);
+        res[1]=root->val+left[0]+right[0];
+        return res;
+    }
+    int rob(TreeNode* root) {
+        vector<int>res=subrob(root);
+        return max(res[0],res[1]);
+    }
+};
+```
