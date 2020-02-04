@@ -1,0 +1,21 @@
+Runtime: 40 ms, faster than 84.00% of C++ online submissions for Coin Change.
+Memory Usage: 12.5 MB, less than 90.20% of C++ online submissions for Coin Change.
+```
+class Solution {
+public:
+    int coinChange(vector<int>& coins, int amount) {
+        int n=coins.size();
+        vector<int>helper(amount+1,amount+1);
+        helper[0]=0;
+        for(int i=1; i<amount+1; ++i){
+            for(int j=0; j<n; ++j){
+                if(coins[j]<=i){
+                    helper[i]=min(helper[i],1+helper[i-coins[j]]);
+                }
+            }
+        }
+        if(helper[amount]>=amount+1)return -1;
+        return helper[amount];
+    }
+};
+```
