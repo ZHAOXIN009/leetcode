@@ -1,0 +1,10 @@
+Runtime: 32 ms, faster than 82.68% of C++ online submissions for Repeated Substring Pattern.
+Memory Usage: 15.6 MB, less than 42.86% of C++ online submissions for Repeated Substring Pattern.
+```
+class Solution {
+public:
+    bool repeatedSubstringPattern(string s) {
+        return (s+s).substr(1,2*s.size()-2).find(s)!=string::npos;
+    }
+};
+```
