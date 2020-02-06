@@ -1,0 +1,42 @@
+Runtime: 32 ms, faster than 60.15% of C++ online submissions for Merge k Sorted Lists.
+Memory Usage: 12.8 MB, less than 5.95% of C++ online submissions for Merge k Sorted Lists.
+```
+class Solution {
+    
+    
+public:
+    
+    
+    class compare{
+        public:
+        bool operator()(ListNode*x, ListNode*y){
+            return x->val>y->val;
+        }
+    };
+    
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if(lists.empty())return NULL;
+        priority_queue<ListNode*,vector<ListNode*>,compare>queue;
+        int n=lists.size();
+        for(int i=0; i<n ;++i){
+            if(lists[i]==NULL)continue;
+            ListNode*curr=lists[i];
+            while(curr!=NULL){
+                queue.push(curr);
+                curr=curr->next;
+            }
+        }
+        if(queue.empty())return NULL;
+        ListNode*head=queue.top();
+        ListNode*curr=head;
+        queue.pop();
+        while(!queue.empty()){
+            curr->next=queue.top();
+            queue.pop();
+            curr=curr->next;
+        }
+        curr->next=NULL;
+        return head;
+    }
+};
+```
