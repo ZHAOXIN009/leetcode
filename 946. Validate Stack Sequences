@@ -1,0 +1,54 @@
+Runtime: 12 ms, faster than 54.25% of C++ online submissions for Validate Stack Sequences.
+Memory Usage: 9.1 MB, less than 100.00% of C++ online submissions for Validate Stack Sequences.
+```
+class Solution {
+public:
+    bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+        stack<int>stack;
+        int left1=0, left2=0;
+        while(left2<popped.size()){
+            if(!stack.empty()&&stack.top()==popped[left2]){
+                stack.pop();
+                left2++;
+            }
+            else{
+                if(left1==pushed.size())return false;
+                while(left1<pushed.size()){
+                    if(pushed[left1]==popped[left2]){
+                        left1++;
+                        left2++;
+                        break;
+                    }
+                    else{
+                        stack.push(pushed[left1]);
+                        left1++;
+                        if(left1==pushed.size()){
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
+    }
+};
+```
+
+cleaner , speed not better
+```
+class Solution {
+public:
+    bool validateStackSequences(vector<int>& pushed, vector<int>& popped) {
+        stack<int> s;
+        int i = 0;
+        for (int x : pushed) {
+            s.push(x);
+            while (s.size() && s.top() == popped[i]) {
+                s.pop();
+                i++;
+            }
+        }
+        return s.empty();
+    }
+};
+```
