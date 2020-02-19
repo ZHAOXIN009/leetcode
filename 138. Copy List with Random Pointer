@@ -1,0 +1,29 @@
+Runtime: 8 ms, faster than 86.35% of C++ online submissions for Copy List with Random Pointer.
+Memory Usage: 13.5 MB, less than 100.00% of C++ online submissions for Copy List with Random Pointer.
+```
+class Solution {
+public:
+    Node* copyRandomList(Node* head) {
+        if(head==NULL)return head;
+        unordered_map<Node*,Node*>map;
+        Node*curr=head;
+        Node*pre=new Node(0);
+        Node* begin=pre;
+        while(curr){
+            Node* temp=new Node(curr->val);
+            map[curr]=temp;
+            begin->next=temp;
+            curr=curr->next;
+            begin=begin->next;
+        }
+        begin=pre->next;
+        curr=head;
+        while(curr!=NULL){
+            begin->random=map[curr->random];
+            curr=curr->next;
+            begin=begin->next;
+        }
+        return pre->next;
+    }
+};
+```
