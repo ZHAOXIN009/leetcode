@@ -1,0 +1,36 @@
+Runtime: 188 ms, faster than 14.71% of C++ online submissions for Serialize and Deserialize Binary Tree.
+Memory Usage: 542.1 MB, less than 6.90% of C++ online submissions for Serialize and Deserialize Binary Tree.
+比不过是因为，那些吊人都直接cin，cout
+```
+class Codec {
+public:
+
+    // Encodes a tree to a single string.
+    string serialize(TreeNode* root) {
+        if(root==NULL)return "N,";
+        return to_string(root->val)+","+serialize(root->left)+serialize(root->right);
+    }
+    TreeNode* deserialize(string data) {
+        return mydeserialize(data); 
+    }
+
+    // Decodes your encoded data to tree.
+    TreeNode* mydeserialize(string& data) {
+        if(data[0]=='N'){
+            data=data.substr(2);
+            return NULL;
+        }
+        
+        int i=0;
+        while(data[i]!=','){
+            i++;
+        }
+        
+        TreeNode*res=new TreeNode(stoi(data.substr(0,i)));
+        data=data.substr(i+1);
+        res->left=mydeserialize(data);
+        res->right=mydeserialize(data);
+        return res;
+    }
+};
+```
