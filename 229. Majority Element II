@@ -1,0 +1,46 @@
+Runtime: 16 ms, faster than 56.71% of C++ online submissions for Majority Element II.
+Memory Usage: 10.6 MB, less than 93.33% of C++ online submissions for Majority Element II.
+```
+class Solution {
+public:
+    vector<int> majorityElement(vector<int>& nums) {
+        int num1=0, num2=0;
+        int time1=0, time2=0;
+        for(int n: nums){
+            if(num1==n){
+                time1++;
+            }
+            else if(num2==n){
+                time2++;
+            }
+            else if(time1==0){
+                time1++;
+                num1=n;
+            }
+            else if(time2==0){
+                time2++;
+                num2=n;
+            }
+            
+            else{
+                time1--;
+                time2--;
+            }
+        }
+        time1=0;
+        time2=0;
+        for(int n:nums){
+            if(n==num1){
+                time1++;
+            }
+            else if(n==num2){
+                time2++;
+            }
+        }
+        vector<int>res;
+        if(time1>nums.size()/3) res.push_back(num1);
+        if(time2>nums.size()/3) res.push_back(num2);
+        return res;
+    }
+};
+```
