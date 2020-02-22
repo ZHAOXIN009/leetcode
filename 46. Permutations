@@ -1,0 +1,26 @@
+
+Runtime: 12 ms, faster than 70.75% of C++ online submissions for Permutations.
+Memory Usage: 10.3 MB, less than 10.45% of C++ online submissions for Permutations.
+```
+class Solution {
+public:
+    void helper(vector<vector<int>>&res,vector<int>row,vector<int>nums,int begin){
+        if(row.size()==nums.size()){
+            res.push_back(row);
+            return;
+        }
+        for(int i=begin; i<nums.size(); ++i){
+            row.push_back(nums[i]);
+            swap(nums[i],nums[begin]);
+            helper(res,row,nums,begin+1);
+            row.pop_back();
+        }
+    }
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>>res;
+        vector<int>row;
+        helper(res,row,nums,0);
+        return res;
+    }
+};
+```
