@@ -1,0 +1,23 @@
+Runtime: 36 ms, faster than 38.17% of C++ online submissions for Number of Dice Rolls With Target Sum.
+Memory Usage: 9.9 MB, less than 100.00% of C++ online submissions for Number of Dice Rolls With Target Sum.
+```
+class Solution {
+public:
+    int numRollsToTarget(int d, int f, int target) {
+        const long long  mod=pow(10, 9) + 7;
+        vector<vector<int>>dp(d+1,vector<int>(target+1,0));
+        dp[0][0]=1;
+        for(int sum=1; sum<=target; ++sum){
+            for(int dices=1; dices<=d; ++dices){
+                for(int face=1; face<=f ;++face){
+                    if(sum>=face){
+                        int re=dp[dices-1][sum-face];
+                        dp[dices][sum]=(dp[dices][sum]+re)%mod;
+                    }
+                }
+            }
+        }
+        return dp[d][target];
+    }
+};
+```
