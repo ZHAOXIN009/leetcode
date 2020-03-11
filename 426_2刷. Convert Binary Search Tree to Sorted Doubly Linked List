@@ -1,0 +1,42 @@
+Runtime: 4 ms, faster than 97.50% of C++ online submissions for Convert Binary Search Tree to Sorted Doubly Linked List.
+Memory Usage: 9.3 MB, less than 100.00% of C++ online submissions for Convert Binary Search Tree to Sorted Doubly Linked List.
+```
+class Solution {
+public:
+    Node*traverse(Node*root,int x){
+        if(root->left){
+            Node*left=traverse(root->left,-1);
+            left->right=root;
+            root->left=left;
+        }
+        if(root->right){
+            Node*right=traverse(root->right,1);
+            right->left=root;
+            root->right=right;
+        }
+        if(x==-1){
+            while(root->right!=NULL){
+                root=root->right;
+            }
+        }
+        else{
+            while(root->left){
+                root=root->left;
+            }
+        }
+        return root;
+    }
+    
+    Node* treeToDoublyList(Node* root) {
+        if(root==NULL)return root; 
+        Node*left=root;
+        while(left->left){
+            left=left->left;
+        }
+        Node*right=traverse(root,-1);
+        left->left=right;
+        right->right=left;
+        return left;
+    }
+};
+```
