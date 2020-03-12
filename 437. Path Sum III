@@ -1,0 +1,28 @@
+Runtime: 20 ms, faster than 74.67% of C++ online submissions for Path Sum III.
+Memory Usage: 14.1 MB, less than 100.00% of C++ online submissions for Path Sum III.
+```
+class Solution {
+public:
+    int res=0;
+    int pathSum(TreeNode* root, int sum) {
+        traverse(root,sum);
+        return res;
+    }
+    void traverse(TreeNode* root, int sum){
+        if(root==NULL)return;
+        if(root->val==sum)res++;
+        conti(root->left,sum-root->val);
+        conti(root->right,sum-root->val);
+        traverse(root->left,sum);
+        traverse(root->right,sum);
+    }
+    
+    //conti means "continue", indicate the road is begin from me
+    void conti(TreeNode*root, int sum){
+        if(!root)return;
+        if(root->val==sum)res++;
+        conti(root->left,sum-root->val);
+        conti(root->right,sum-root->val);
+    }
+};
+```
