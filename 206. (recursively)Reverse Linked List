@@ -1,0 +1,14 @@
+Runtime: 8 ms, faster than 94.75% of C++ online submissions for Reverse Linked List.
+Memory Usage: 8.9 MB, less than 100.00% of C++ online submissions for Reverse Linked List
+```
+class Solution {
+public:
+    ListNode* reverseList(ListNode* head) {
+        if(!head||!head->next)return head;
+        ListNode* Next=reverseList(head->next);
+        head->next->next=head;
+        head->next=NULL;
+        return Next;
+    }
+};
+```
