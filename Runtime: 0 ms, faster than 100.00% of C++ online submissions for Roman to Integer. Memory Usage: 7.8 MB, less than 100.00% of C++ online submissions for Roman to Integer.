@@ -1,0 +1,38 @@
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Roman to Integer.
+Memory Usage: 7.8 MB, less than 100.00% of C++ online submissions for Roman to Integer.
+```
+class Solution {
+public:
+    int romanToInt(string s) {
+        int res=0;
+        for(int i=s.size()-1; i>=0; --i){
+            if(s[i]=='I'){
+                int temp=res<5?1:-1;
+                res+=temp;
+            }
+            else if(s[i]=='V'){
+                res+=5;
+            }
+            else if(s[i]=='X'){
+                int temp=res<50?10:-10;
+                res+=temp;
+            }
+            else if(s[i]=='L'){
+                res+=50;
+            }
+            else if(s[i]=='C'){
+                int temp=res<500?100:-100;
+                 res+=temp;
+            }
+            else if(s[i]=='D'){
+                res+=500;
+            }
+            else{
+                res+=1000;
+            }
+           
+        }
+        return res;
+    }
+};
+```
