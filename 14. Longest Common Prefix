@@ -1,0 +1,23 @@
+Runtime: 4 ms, faster than 95.54% of C++ online submissions for Longest Common Prefix.
+Memory Usage: 8 MB, less than 100.00% of C++ online submissions for Longest Common Prefix.
+
+the most imprtant part of this question is not how you design your code, but what prefix means!
+```
+class Solution {
+public:
+    string longestCommonPrefix(vector<string>& strs) {
+        string res="";
+        if(strs.empty())return res;
+        res=strs[0];
+        for(int i=1 ;i<strs.size();++i){
+            for(int j=0; j<res.size();++j){
+                if(res[j]!=strs[i][j]){
+                    res=res.substr(0,j);
+                    if(res.size()==0)return res;
+                }
+            }
+        }
+        return res;
+    }
+};
+```
