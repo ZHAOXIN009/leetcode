@@ -1,0 +1,40 @@
+Runtime: 104 ms, faster than 59.14% of C++ online submissions for 3Sum.
+Memory Usage: 56.5 MB, less than 5.30% of C++ online submissions for 3Sum.
+```
+class Solution {
+public:
+    vector<vector<int>> threeSum(vector<int>& nums) {
+        
+        vector<vector<int>>res;
+        if(nums.size()<3)return res;
+        sort(nums.begin(),nums.end());
+        for(int i=0; i<nums.size()-2;++i){
+            if(i>0&&nums[i]==nums[i-1])continue;
+            twoSum(res,nums,i+1,nums.size()-1,-nums[i]);
+        }
+        return res;
+    }
+    
+    void twoSum(vector<vector<int>>&res, vector<int>nums, int left, int right, int target){
+        vector<int>row(3);
+        row[0]=nums[left-1];
+        while(left<right){
+            if(nums[left]+nums[right]==target){
+                row[1]=nums[left];
+                row[2]=nums[right];
+                res.push_back(row);
+                left++;
+                while(left<right&&nums[left]==nums[left-1]){
+                    left++;
+                }
+            }
+            else if(nums[left]+nums[right]<target){
+                left++;
+            }
+            else{
+                right--;
+            }
+        }
+    }
+};
+```
