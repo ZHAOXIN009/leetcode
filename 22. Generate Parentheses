@@ -1,0 +1,77 @@
+Runtime: 4 ms, faster than 87.43% of C++ online submissions for Generate Parentheses.
+Memory Usage: 10.3 MB, less than 95.87% of C++ online submissions for Generate Parentheses.
+```
+logic
+ is
+ not good
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        int left=n,right=n;
+        vector<string>res;
+        if(n==0)return res;
+        string temp;
+        traverse(left,right,temp,res);
+        return res;
+    }
+    
+    void traverse(int left,int right,string temp,vector<string>&res){
+        if(left==0){
+            while(right>0){
+                temp+=")";
+                right--;
+            }
+            res.push_back(temp);
+            return ;
+        }
+        temp+="(";
+        left--;
+        traverse(left,right,temp,res);
+        if(left==0){
+            
+            return;
+        }
+        while(left<right){
+            temp+=")";
+            right--;
+            traverse(left,right,temp,res);
+            
+        }
+            
+        
+    }
+};
+```
+
+```
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Generate Parentheses.
+Memory Usage: 16.3 MB, less than 76.86% of C++ online submissions for Generate Parentheses.
+good
+
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        int left=0,right=0;
+        vector<string>res;
+        
+        string temp;
+        traverse(left,right,temp,res, n);
+        return res;
+    }
+    
+    void traverse(int left,int right,string temp,vector<string>&res,int n){
+        if(temp.size()==2*n){
+            res.push_back(temp);
+            return ;
+        }
+        if(left<n){
+            
+            traverse(left+1,right,temp+"(",res, n);
+        }
+        if(right<left){
+            traverse(left,right+1,temp+")",res, n);
+        }
+        
+    }
+};
+```
