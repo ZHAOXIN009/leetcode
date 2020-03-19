@@ -1,0 +1,36 @@
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Search in Rotated Sorted Array.
+Memory Usage: 8 MB, less than 100.00% of C++ online submissions for Search in Rotated Sorted Array.
+```
+class Solution {
+public:
+    int search(vector<int>& nums, int target) {
+        int left=0,right=nums.size()-1;
+        return my_search(nums,left,right,target);
+    }
+    
+    int my_search(vector<int>&nums, int left,int right,int target){
+        int  mid=(left+right)/2;
+        if(left>right)return -1;
+        if(nums[mid]==target){
+            return mid;
+        }
+        if(nums[left]<=nums[mid]){
+            if(nums[left]<=target&&target<nums[mid]){
+                return my_search(nums,left,mid-1,target);
+            }
+            else{
+                return my_search(nums,mid+1,right,target);
+            }
+            
+        }
+        else{
+            if(nums[mid]<target&&target<=nums[right]){
+                return my_search(nums,mid+1,right,target);
+            }
+            else{
+                return my_search(nums,left,mid-1,target);
+            }
+        }
+    }
+};
+```
