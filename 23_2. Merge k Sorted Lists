@@ -1,0 +1,87 @@
+```
+/*
+use priority_queue, space complexity not good
+Runtime: 32 ms, faster than 72.30% of C++ online submissions for Merge k Sorted Lists.
+Memory Usage: 12.1 MB, less than 8.33% of C++ online submissions for Merge k Sorted Lists.
+class Solution {
+    
+    
+public:
+    
+    
+    class compare{
+        public:
+        bool operator()(ListNode*x, ListNode*y){
+            return x->val>y->val;
+        }
+    };
+    
+    ListNode* mergeKLists(vector<ListNode*>& lists) {
+        if(lists.empty())return NULL;
+        priority_queue<ListNode*,vector<ListNode*>,compare>queue;
+        int n=lists.size();
+        for(int i=0; i<n ;++i){
+            if(lists[i]==NULL)continue;
+            ListNode*curr=lists[i];
+            while(curr!=NULL){
+                queue.push(curr);
+                curr=curr->next;
+            }
+        }
+        if(queue.empty())return NULL;
+        ListNode*head=queue.top();
+        ListNode*curr=head;
+        queue.pop();
+        while(!queue.empty()){
+            curr->next=queue.top();
+            queue.pop();
+            curr=curr->next;
+        }
+        curr->next=NULL;
+        return head;
+    }
+};
+*/
+
+second solution, bad time complexity, but is inplace merge
+Runtime: 440 ms, faster than 6.37% of C++ online submissions for Merge k Sorted Lists.
+Memory Usage: 11.8 MB, less than 17.86% of C++ online submissions for Merge k Sorted Lists.
+
+class Solution{
+   public:
+    ListNode* mergeKLists(vector<ListNode*>&lists){
+        if(lists.empty())return nullptr;
+        while(lists.size()>1){
+            lists.push_back(merge(lists[0],lists[1]));
+            lists.erase(lists.begin());
+            lists.erase(lists.begin());
+        }
+        return lists.front();
+    }
+    
+    
+    ListNode* merge(ListNode*l1, ListNode* l2){
+        if(l1==NULL){
+            return l2;
+        }
+        else {
+            if(l2==NULL){
+                return l1;
+            }
+            else{
+                if(l1->val<l2->val){
+                    l1->next=merge(l1->next,l2);
+                    return l1;
+                }
+                else{
+                    l2->next=merge(l2->next,l1);
+                    return l2;
+                }
+            }
+        }
+        
+    }
+} ;
+
+
+```
