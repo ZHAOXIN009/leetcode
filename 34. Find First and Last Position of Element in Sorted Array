@@ -1,0 +1,43 @@
+Runtime: 4 ms, faster than 99.37% of C++ online submissions for Find First and Last Position of Element in Sorted Array.
+Memory Usage: 8.3 MB, less than 100.00% of C++ online submissions for Find First and Last Position of Element in Sorted Array.
+```
+class Solution {
+public:
+    vector<int> searchRange(vector<int>& nums, int target) {
+        vector<int>res(2,-1);
+        if(nums.size()==0)return res;
+        int left=0,right=nums.size()-1;
+        int mid;
+        while(left<right){
+            mid=(left+right)/2;
+            if(target>nums[mid]){
+                
+                left=mid+1;
+            }
+            else{
+                right=mid;
+            }
+        }
+        if(nums[left]!=target){
+            return res;
+        }
+        
+        res[0]=left;
+        
+        right=nums.size()-1;
+        while(left<right){
+            //very very very important! make the mid biased to right. if not, the cycle will run forever
+            mid=(left+right)/2+1; 
+            if(target<nums[mid]){
+                
+                right=mid-1;
+            }
+            else{
+                left=mid;
+            }
+        }
+        res[1]=right;
+        return res;
+    }
+};
+```
