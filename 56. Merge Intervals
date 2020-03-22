@@ -1,0 +1,30 @@
+Runtime: 40 ms, faster than 26.22% of C++ online submissions for Merge Intervals.
+Memory Usage: 10 MB, less than 100.00% of C++ online submissions for Merge Intervals.
+```
+class Solution {
+public:
+    vector<vector<int>> merge(vector<vector<int>>& intervals) {
+        if(intervals.size()<=1)return intervals;
+        vector<vector<int>>res;
+        sort(intervals.begin(),intervals.end());
+        vector<int>curr=intervals[0];
+        
+        for(int i=0; i<intervals.size();++i){
+            if(curr[1]<intervals[i][0]){
+                res.push_back(curr);
+                curr=intervals[i];
+            }
+            else if(curr[1]<intervals[i][1]){
+                curr[1]=intervals[i][1];
+            }
+            else{
+                continue;
+            }
+        }
+        if(res.empty()||res[res.size()-1]!=curr){
+            res.push_back(curr);
+        }
+        return res;
+    }
+};
+```
