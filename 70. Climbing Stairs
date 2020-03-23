@@ -1,0 +1,18 @@
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Climbing Stairs.
+Memory Usage: 6.1 MB, less than 100.00% of C++ online submissions for Climbing Stairs.
+```
+class Solution {
+public:
+    int climbStairs(int n) {
+        if(n<=1)return 1;
+        int pre1=1,pre2=1;
+        while(n>=2){
+            int temp=pre2;
+            pre2=pre1+pre2;
+            pre1=temp;
+            n--;
+        }
+        return pre2;
+    }
+};
+```
