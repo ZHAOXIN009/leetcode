@@ -1,0 +1,39 @@
+Runtime: 4 ms, faster than 84.75% of C++ online submissions for Binary Tree Zigzag Level Order Traversal.
+Memory Usage: 11.3 MB, less than 100.00% of C++ online submissions for Binary Tree Zigzag Level Order Traversal.
+```
+class Solution {
+public:
+    vector<vector<int>> zigzagLevelOrder(TreeNode* root) {
+        vector<vector<int>>res;
+        if(!root)return res;
+        stack<TreeNode*>s1,s2;
+        s1.push(root);
+        while(!s1.empty()){
+            vector<int>row;
+            while(!s1.empty()){
+                TreeNode*temp=s1.top();
+                row.push_back(temp->val);
+                if(temp->left)s2.push(temp->left);
+                if(temp->right)s2.push(temp->right);
+                s1.pop();
+            }
+            res.push_back(row);
+            
+            if(!s2.empty()){
+                vector<int>row2;
+                while(!s2.empty()){
+                    TreeNode*temp=s2.top();
+                    row2.push_back(temp->val);
+                    if(temp->right)s1.push(temp->right);
+                    if(temp->left)s1.push(temp->left);
+                    s2.pop();
+                
+              }
+                res.push_back(row2);
+            }
+            
+        }
+        return res;
+    }
+};
+```
