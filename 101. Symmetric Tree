@@ -1,0 +1,25 @@
+Runtime: 4 ms, faster than 82.93% of C++ online submissions for Symmetric Tree.
+Memory Usage: 12.5 MB, less than 100.00% of C++ online submissions for Symmetric Tree.
+```
+class Solution {
+public:
+    bool isSymmetric(TreeNode* root) {
+        if(root==NULL)return  true;
+        return isSame(root->left,root->right);  
+    }
+    
+    bool isSame(TreeNode* left, TreeNode* right){
+        if(left==NULL){
+            if(right==NULL)return true;
+            else return false;
+        }
+        else{
+            if(right==NULL)return false;
+            else{
+                if(left->val==right->val)return isSame(left->left,right->right)&&isSame(left->right,right->left);
+                else return false;
+            }
+        }
+    }
+};
+```
