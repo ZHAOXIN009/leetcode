@@ -1,0 +1,23 @@
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Pascal's Triangle.
+Memory Usage: 6.3 MB, less than 100.00% of C++ online submissions for Pascal's Triangle.
+```
+class Solution {
+public:
+    vector<vector<int>> generate(int numRows) {
+        vector<vector<int>>res;
+        int n=0;
+        while(numRows!=0){
+            vector<int>row(n+1,1);
+            if(n>1){
+                for(int i=1;i<=n-1;++i){
+                    row[i]=res[n-1][i]+res[n-1][i-1];
+                }
+            }
+            res.push_back(row);
+            n++;
+            numRows--;
+        }
+        return res;
+    }
+};
+```
