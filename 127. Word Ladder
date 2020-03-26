@@ -1,0 +1,36 @@
+Runtime: 132 ms, faster than 60.13% of C++ online submissions for Word Ladder.
+Memory Usage: 10.5 MB, less than 100.00% of C++ online submissions for Word Ladder.
+```
+class Solution {
+public:
+    int ladderLength(string beginWord, string endWord, vector<string>& wordList) {
+        queue<string>queue;
+        int res=1;
+        unordered_set<string>set(wordList.begin(),wordList.end());
+        queue.push(beginWord);
+        while(!queue.empty()){
+            int n=queue.size();
+            for(int k=0;k<n;++k){
+                string curr=queue.front();
+                queue.pop();
+                if(curr==endWord)return res;
+                
+                for(int i=0;i<curr.size();++i){
+                    char temp=curr[i];
+                    for(int j=0; j<=25; ++j){
+                        curr[i]='a'+j;
+                        if(set.find(curr)!=set.end()){
+                            queue.push(curr);
+                            set.erase(curr);
+                        }
+                    }
+                    curr[i]=temp;
+                }
+                
+            }
+            res++;
+        }
+        return 0;
+    }
+};
+```
