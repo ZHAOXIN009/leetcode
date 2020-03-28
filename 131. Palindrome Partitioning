@@ -1,0 +1,42 @@
+Runtime: 104 ms, faster than 12.51% of C++ online submissions for Palindrome Partitioning.
+Memory Usage: 71.1 MB, less than 25.00% of C++ online submissions for Palindrome Partitioning.
+```
+class Solution {
+public:
+    vector<vector<string>> partition(string s) {
+        vector<vector<string>>res;
+        vector<string>row;
+        if(s.size()==0)return res;
+        traverse(res,row,s,0,s.size()-1);
+        return res;
+    }
+    
+    void traverse(vector<vector<string>>&res,vector<string>row,string s,int left, int right){
+        if(left>right){
+            res.push_back(row);
+            return ;
+        }
+        
+        for(int i=left;i<s.size();++i){
+            if(isvalid(s,left,i)){
+                row.push_back(s.substr(left,i-left+1));
+                traverse(res,row,s,i+1,right);
+                row.pop_back();
+            }
+            
+            
+        }
+    }
+    
+    
+    bool isvalid(string s, int left,int right){
+        while(left<right){
+            if(s[left]!=s[right])return false;
+            left++;
+            right--;
+            
+        }
+        return true;
+    }
+};
+```
