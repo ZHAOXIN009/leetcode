@@ -1,0 +1,62 @@
+Runtime: 36 ms, faster than 40.38% of C++ online submissions for Min Stack.
+Memory Usage: 14.4 MB, less than 100.00% of C++ online submissions for Min Stack.
+```
+class MinStack {
+public:
+    stack<int>s;
+    int currmin;
+    /** initialize your data structure here. */
+    MinStack() {
+        
+    }
+    
+    void push(int x) {
+        if(s.empty()){
+            s.push(x);
+            s.push(x);
+            currmin=x;
+            return;
+        }
+        if(x>=currmin){
+            s.push(x);
+            s.push(currmin);
+            return;
+        }
+        currmin=x;
+        s.push(x);
+        s.push(x);
+        
+    }
+    
+    void pop() {
+        if(s.empty())return;
+        if(currmin==s.top()){
+            s.pop();
+            s.pop();
+            if(s.empty()){
+                currmin=-1;
+                return;
+            }
+            currmin=s.top();
+            return;
+        }
+        s.pop();
+        s.pop();
+    }
+    
+    int top() {
+        if(s.empty())return -1;
+        int temp=s.top();
+        s.pop();
+        int res=s.top();
+        s.push(temp);
+        return res;
+    }
+    
+    int getMin() {
+        if(s.empty())return -1;
+        return currmin;
+    }
+};
+
+```
