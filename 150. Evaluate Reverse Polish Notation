@@ -1,0 +1,27 @@
+Runtime: 16 ms, faster than 58.08% of C++ online submissions for Evaluate Reverse Polish Notation.
+Memory Usage: 9.4 MB, less than 100.00% of C++ online submissions for Evaluate Reverse Polish Notation.
+```
+class Solution {
+public:
+    int evalRPN(vector<string>& tokens) {
+        if(tokens.size()==0)return 0;
+        stack<int>stack;
+        for(int i=0; i<tokens.size();++i){
+            if(tokens[i].size()>1||isdigit(tokens[i][0])){   //tokens[i].size()>1 means it is a negative integer
+                stack.push(stoi(tokens[i]));
+            }
+            else{
+                int temp1=stack.top();
+                stack.pop();
+                int temp2=stack.top();
+                stack.pop();
+                if(tokens[i]=="-")stack.push(temp2-temp1);
+                else if(tokens[i]=="+")stack.push(temp2+temp1);
+                else if(tokens[i]=="*")stack.push(temp2*temp1);
+                else stack.push(temp2/temp1);
+            }
+        }
+        return stack.top();
+    }
+};
+```
