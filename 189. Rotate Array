@@ -1,0 +1,14 @@
+Runtime: 12 ms, faster than 99.41% of C++ online submissions for Rotate Array.
+Memory Usage: 7.4 MB, less than 100.00% of C++ online submissions for Rotate Array.
+```
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+        int n=nums.size();
+        k=k%n;
+        reverse(nums.begin(),nums.end());
+        reverse(nums.begin(),nums.begin()+k);
+        reverse(nums.begin()+k,nums.end());
+    }
+};
+```
