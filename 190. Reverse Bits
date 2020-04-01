@@ -1,0 +1,18 @@
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Reverse Bits.
+Memory Usage: 6.3 MB, less than 100.00% of C++ online submissions for Reverse Bits.
+```
+class Solution {
+public:
+    uint32_t reverseBits(uint32_t n) {
+        uint32_t res=0;
+        int count=32;
+        while(count!=0){
+            int i=n&1;
+            res=res*2+i;
+            count--;
+            n=n>>1;
+        }
+        return res;
+    }
+};
+```
