@@ -1,0 +1,17 @@
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for House Robber.
+Memory Usage: 6.5 MB, less than 100.00% of C++ online submissions for House Robber.
+```
+class Solution {
+public:
+    int rob(vector<int>& nums) {
+        
+        int p1=0,p2=0;
+        for(int i: nums){
+            int temp=p2;
+            p2=max(p2,p1+i);
+            p1=temp;
+        }
+        return p2;
+    }
+};
+```
