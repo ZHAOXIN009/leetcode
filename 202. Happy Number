@@ -1,0 +1,25 @@
+Runtime: 4 ms, faster than 58.48% of C++ online submissions for Happy Number.
+Memory Usage: 6.3 MB, less than 100.00% of C++ online submissions for Happy Number.
+```
+class Solution {
+public:
+    bool isHappy(int n) {
+        unordered_set<int>myset;
+        while(myset.find(n)==myset.end()){
+            if(n==1) return true;
+            myset.insert(n);
+            n=trans(n);
+        }
+        return false;
+    }
+    int trans(int n){
+        int res=0;
+        while(n!=0){
+            int temp=n%10;
+            res+=temp*temp;
+            n=n/10;
+        }
+        return res;
+    }
+};
+```
