@@ -1,0 +1,33 @@
+Runtime: 12 ms, faster than 91.31% of C++ online submissions for Number of Islands.
+Memory Usage: 8.4 MB, less than 100.00% of C++ online submissions for Number of Islands.
+```
+class Solution {
+public:
+    int numIslands(vector<vector<char>>& grid) {
+        if(grid.size()==0)return 0;
+        if(grid[0].size()==0)return 0;
+        int res=0;
+        for(int i=0; i<grid.size();++i){
+            for(int j=0;j<grid[0].size();++j){
+                if(grid[i][j]=='1'){
+                    check(grid,i,j);
+                    res++;
+                }
+            }
+        }
+        return res;
+    }
+    
+    
+    void check(vector<vector<char>>&grid,int i,int j){
+        if(i<0||j<0||i>=grid.size()||j>=grid[0].size()||grid[i][j]!='1'){
+            return ;
+        }
+        grid[i][j]='0';
+        check(grid,i-1,j);
+        check(grid,i,j-1);
+        check(grid,i+1,j);
+        check(grid,i,j+1);
+    }
+};
+```
