@@ -1,0 +1,16 @@
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Number of 1 Bits.
+Memory Usage: 6 MB, less than 100.00% of C++ online submissions for Number of 1 Bits.
+```
+class Solution {
+public:
+    int hammingWeight(uint32_t n) {
+        int res=0;
+        while(n!=0){
+            res+=n&1;
+            n=n>>1;
+            
+        }
+        return res;
+    }
+};
+```
