@@ -1,0 +1,29 @@
+Runtime: 20 ms, faster than 74.46% of C++ online submissions for Lowest Common Ancestor of a Binary Tree.
+Memory Usage: 14.5 MB, less than 100.00% of C++ online submissions for Lowest Common Ancestor of a Binary Tree.
+```
+class Solution {
+public:
+    TreeNode* t=NULL;
+    
+    int son(TreeNode*root,TreeNode* p, TreeNode* q){
+        int res=0;
+        if (root->left)res+=son(root->left,p,q);
+        if(root==p||root==q)res++;
+        if(root->right)res+=son(root->right,p,q);
+        if(res>=2) {
+            t=root;
+            return 1;
+        }
+        if(res>0)return 1;
+        else{
+            return 0;
+        }
+    }
+    
+    
+    TreeNode* lowestCommonAncestor(TreeNode* root, TreeNode* p, TreeNode* q) {
+        son (root,p,q);
+        return  t;
+    }
+};
+```
