@@ -1,0 +1,20 @@
+Runtime: 8 ms, faster than 97.45% of C++ online submissions for Valid Anagram.
+Memory Usage: 7.2 MB, less than 100.00% of C++ online submissions for Valid Anagram.
+```
+class Solution {
+public:
+    bool isAnagram(string s, string t) {
+        if(s.size()!=t.size())return false;
+        int S[26]={0};
+        int T[26]={0};
+        for(int i=0;i<s.size();++i){
+            S[s[i]-'a']++;
+            T[t[i]-'a']++;
+        }
+        for(int i=0;i<26;++i){
+            if(S[i]!=T[i])return false;
+        }
+    return true;
+    }
+};
+```
