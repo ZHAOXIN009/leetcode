@@ -1,0 +1,19 @@
+Runtime: 4 ms, faster than 96.62% of C++ online submissions for Increasing Triplet Subsequence.
+Memory Usage: 6.8 MB, less than 100.00% of C++ online submissions for Increasing Triplet Subsequence.
+```
+class Solution {
+public:
+    bool increasingTriplet(vector<int>& nums) {
+        if(nums.size()<=2)return false;
+        int p1=nums[0], p2=INT_MAX;
+        for(int i=1; i<nums.size();++i){
+            if(nums[i]>p2)return true;
+            if(nums[i]>p1){
+                p2=min(p2,nums[i]);
+            }
+            p1=min(p1,nums[i]);
+        }
+        return false;
+    }
+};
+```
