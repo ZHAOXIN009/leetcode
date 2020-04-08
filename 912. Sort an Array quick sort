@@ -1,0 +1,44 @@
+Runtime: 36 ms, faster than 98.65% of C++ online submissions for Sort an Array.
+Memory Usage: 15.7 MB, less than 22.22% of C++ online submissions for Sort an Array.
+```
+class Solution {
+public:
+    vector<int> sortArray(vector<int>& nums) {
+        if(nums.size()<=1)return nums;
+        ksort(nums,0,nums.size()-1);
+        return nums;
+    }
+    
+    
+    void ksort(vector<int>&nums,int left,int right){
+        int begin=left,end=right;
+        if(left>=right)return;
+        int curr=nums[left];
+        while(left<right){
+            while(left<right){
+                if(nums[right]>=curr){
+                    right--;
+                }
+                else{
+                    nums[left]=nums[right];
+                    left++;
+                    break;
+                }
+            }
+            while(left<right){
+                if(nums[left]<=curr){
+                    left++;
+                }
+                else{
+                    nums[right]=nums[left];
+                    right--;
+                    break;
+                }
+            }
+            nums[left]=curr;
+        }
+        ksort(nums,begin,left-1);
+        ksort(nums,left+1,end);
+    }
+};
+```
