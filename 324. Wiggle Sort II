@@ -1,0 +1,26 @@
+Runtime: 84 ms, faster than 35.36% of C++ online submissions for Wiggle Sort II.
+Memory Usage: 9.2 MB, less than 100.00% of C++ online submissions for Wiggle Sort II.
+```
+class Solution {
+public:
+    void wiggleSort(vector<int>& nums) {
+        if(nums.size()<=1)return ;
+        vector<int>curr=nums;
+        sort(curr.begin(),curr.end());
+        int i=(nums.size()-1)/2;
+        int j=nums.size()-1;
+        for(int k=0; k<nums.size();++k){
+            if(k&1){
+                nums[k]=curr[j];
+                j--;
+            }
+            else{
+                nums[k]=curr[i];
+                i--;
+            }
+        }
+        
+        
+    }
+};
+```
