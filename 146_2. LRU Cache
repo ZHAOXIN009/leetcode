@@ -1,0 +1,44 @@
+Runtime: 160 ms, faster than 45.77% of C++ online submissions for LRU Cache.
+Memory Usage: 35.3 MB, less than 100.00% of C++ online submissions for LRU Cache.
+```
+class LRUCache {
+    int mysize;
+    unordered_map<int,list<pair<int,int>>::iterator>mymap;
+    list<pair<int,int>>used;
+public:
+    LRUCache(int capacity) {
+        mysize=capacity;
+        
+    }
+    
+    int get(int key) {
+        auto  it=mymap.find(key);
+        if(it==mymap.end()){
+            return -1;
+        }
+        used.splice(used.begin(),used,it->second);
+        return it->second->second;
+    }
+    
+    void put(int key, int value) {
+        auto  it=mymap.find(key);
+        if(it!=mymap.end()){
+            it->second->second=value;
+            used.splice(used.begin(),used,it->second);
+        }
+        else{
+            if(mymap.size()==mysize){
+                int temp=used.back().first;
+                mymap.erase(temp);
+                used.pop_back();
+            }
+            
+            used.push_front({key,value});
+            mymap[key]=used.begin();
+            
+        }
+        
+    }
+};
+
+```
