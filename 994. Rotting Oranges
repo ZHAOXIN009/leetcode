@@ -1,0 +1,47 @@
+Runtime: 4 ms, faster than 93.98% of C++ online submissions for Rotting Oranges.
+Memory Usage: 6.6 MB, less than 100.00% of C++ online submissions for Rotting Oranges.
+```
+class Solution {
+public:
+    int num=0; //how many fresh oranges
+    int orangesRotting(vector<vector<int>>& grid) {
+        int res=0;  //record the total time needed
+        int count=0;  //sign whether we find a fresh oriange become rotten
+        int curr=2;   //thw curr means for now the rotten ones are '2', these rotten oranges rotting fresh oranges to be curr+1='3';
+        
+        for(int i=0 ;i<grid.size();++i){
+                for(int j=0;j<grid[0].size();++j){
+                    if(grid[i][j]==1)num++;
+                }
+        }
+        while(true){
+            for(int i=0 ;i<grid.size();++i){
+                for(int j=0;j<grid[0].size();++j){
+                    if(grid[i][j]==curr){
+                        
+                        count+=bad(grid,curr,i-1,j);
+                        count+=bad(grid,curr,i,j-1);
+                        count+=bad(grid,curr,i+1,j);
+                        count+=bad(grid,curr,i,j+1);
+                    }
+                }
+            }
+            if(count!=0){
+                curr++;
+                res++;
+                count=0;
+            }
+            else break;
+        }
+        if(num!=0)return -1;
+        return res;
+    }
+    
+    int bad(vector<vector<int>>&grid,int curr,int i, int j){
+        if(i<0||j<0||i>=grid.size()||j>=grid[0].size()||grid[i][j]!=1)return 0;
+        grid[i][j]=curr+1;
+        num--;
+        return 1;
+    }
+};
+```
