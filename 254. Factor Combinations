@@ -1,0 +1,30 @@
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Factor Combinations.
+Memory Usage: 6.9 MB, less than 100.00% of C++ online submissions for Factor Combinations.
+```
+class Solution {
+public:
+    vector<vector<int>> getFactors(int n) {
+        vector<vector<int>>res;
+        vector<int>row;
+        traverse(res,row,n,2);
+        return res;
+    }
+    
+    void traverse(vector<vector<int>>&res, vector<int>row, int n, int begin){
+        if(n==1||begin>n)return ;
+        if(row.size()!=0){
+            row.push_back(n);
+            res.push_back(row);
+            row.pop_back();
+        }
+        
+        for(int i=begin; i<=sqrt(n);++i){
+            if(n%i==0){
+                row.push_back(i);
+                traverse(res,row,n/i,i);
+                row.pop_back();
+            }
+        }
+    }
+};
+```
