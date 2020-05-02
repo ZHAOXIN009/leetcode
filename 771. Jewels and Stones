@@ -1,0 +1,20 @@
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Jewels and Stones.
+Memory Usage: 6.2 MB, less than 100.00% of C++ online submissions for Jewels and Stones.
+```
+class Solution {
+public:
+    int numJewelsInStones(string J, string S) {
+        unordered_set<char>myset;
+        int res=0;
+        for(char temp :J){
+            myset.insert(temp);
+        }
+        for(char temp: S){
+            if(myset.find(temp)!=myset.end()){
+                res++;
+            }
+        }
+        return res;
+    }
+};
+```
