@@ -1,0 +1,14 @@
+Runtime: 36 ms, faster than 84.67% of C++ online submissions for Inorder Successor in BST.
+Memory Usage: 22.8 MB, less than 100.00% of C++ online submissions for Inorder Successor in BST.
+```
+class Solution {
+public:
+    TreeNode* inorderSuccessor(TreeNode* root, TreeNode* p) {
+        if(root==NULL)return root;
+        if(p->val>=root->val)return inorderSuccessor(root->right,p);
+        TreeNode* left=inorderSuccessor(root->left,p);
+        if(left==NULL)return root;
+        else return left;
+    }
+};
+```
