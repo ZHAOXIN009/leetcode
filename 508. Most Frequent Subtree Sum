@@ -1,0 +1,35 @@
+
+Runtime: 28 ms, faster than 43.02% of C++ online submissions for Most Frequent Subtree Sum.
+Memory Usage: 25.3 MB, less than 33.33% of C++ online submissions for Most Frequent Subtree Sum.
+```
+class Solution {
+public:
+    int count=0;
+    vector<int>res;
+    unordered_map<int,int>mymap;
+    vector<int> findFrequentTreeSum(TreeNode* root) {
+        
+        if(root==NULL)return res;
+        traverse(root);
+        for(auto temp : mymap){
+            if(temp.second==count){
+                res.push_back(temp.first);
+            }
+            
+        }
+        return res;
+        
+    }
+    int traverse(TreeNode* root){
+        int left=0,right=0;
+        if(root->left)left=traverse(root->left);
+        if(root->right)right=traverse(root->right);
+        int num=root->val+left+right;
+        
+        mymap[num]++;
+        count=max(count,mymap[num]);
+        return num;
+    }
+    
+};
+```
