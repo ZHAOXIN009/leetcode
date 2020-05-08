@@ -1,0 +1,28 @@
+Runtime: 12 ms, faster than 56.78% of C++ online submissions for Check If It Is a Straight Line.
+Memory Usage: 9.9 MB, less than 100.00% of C++ online submissions for Check If It Is a Straight Line.
+```
+class Solution {
+public:
+    bool checkStraightLine(vector<vector<int>>& coordinates) {
+        double k;
+        if(coordinates[0][0]==coordinates[1][0]){
+            k=coordinates[0][0];
+            for(vector<int>temp:coordinates){
+                if(temp[0]!=k){
+                    return false;
+                }
+            }
+            return true;
+            
+        }
+        k=(coordinates[1][1]-coordinates[0][1])/double(coordinates[1][0]-coordinates[0][0]);
+        for(int i=2; i<coordinates.size(); ++i){
+            if(((coordinates[i][1]-coordinates[0][1])/double(coordinates[i][0]-coordinates[0][0]))!=k){
+                return false;
+            }
+            
+        }
+        return true;
+    }
+};
+```
