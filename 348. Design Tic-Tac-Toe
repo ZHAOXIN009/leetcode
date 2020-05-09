@@ -1,0 +1,71 @@
+Runtime: 44 ms, faster than 87.29% of C++ online submissions for Design Tic-Tac-Toe.
+Memory Usage: 17.9 MB, less than 100.00% of C++ online submissions for Design Tic-Tac-Toe.
+```
+class TicTacToe {
+public:
+    vector<vector<int>>matrix;
+    int m;
+    /** Initialize your data structure here. */
+    TicTacToe(int n) {
+        m=n;
+        vector<vector<int>>temp(m,vector<int>(m,0));
+        matrix=temp;
+        
+    }
+    
+    /** Player {player} makes a move at ({row}, {col}).
+        @param row The row of the board.
+        @param col The column of the board.
+        @param player The player, can be either 1 or 2.
+        @return The current winning condition, can be either:
+                0: No one wins.
+                1: Player 1 wins.
+                2: Player 2 wins. */
+    int move(int row, int col, int player) {
+        matrix[row][col]=player;
+        if(checkrow(row,player)||checkcol(col,player))return player;
+        if(row==col||row==m-col-1){
+            if(checkdia(player)||checkantidia(player))return player;
+        }
+        return 0;
+    }
+    
+    bool checkrow(int row, int player){
+        
+        for(int j=0; j<m; ++j ){
+            if(matrix[row][j]!=player){
+                return false;
+            }
+        }
+        return true; 
+    }
+    
+    bool checkcol(int col, int player){
+        for(int i=0; i<m; ++i){
+            if(matrix[i][col]!=player){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    bool checkdia(int player){
+        for(int i=0,j=0; i<m,j<m; ++i,++j){
+            if(matrix[i][j]!=player){
+                return false;
+            }
+        }
+        return true;
+    }
+    
+    bool checkantidia(int player){
+        for(int i=0, j=m-1; i<m,j>=0; ++i,--j){
+            if(matrix[i][j]!=player){
+                return false;
+            }
+        }
+        return true;
+    }
+};
+
+```
