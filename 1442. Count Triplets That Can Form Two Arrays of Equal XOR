@@ -1,0 +1,28 @@
+```
+class Solution {
+public:
+    int countTriplets(vector<int>& arr) {
+        int sum=0;
+        vector<int>sumXOR(arr.size());
+        for(int i=0; i<arr.size(); ++i){
+            sum=sum^arr[i];
+            sumXOR[i]=sum;
+        }
+        int res=0;
+        for(int j=1; j<arr.size(); ++j){
+            unordered_map<int,int>mymap;
+            for(int i=0; i<j; ++i){
+                if(j-1==i)mymap[sumXOR[j-1]]++;
+                else mymap[sumXOR[j-1]^sumXOR[i]]++;
+            }
+            for(int k=j; k<arr.size(); ++k){
+                int temp=sumXOR[k]^sumXOR[j-1];
+                if(mymap.find(temp)!=mymap.end()){
+                    res+=mymap[temp];
+                }
+            }
+        }
+        return res;
+    }
+};
+```
