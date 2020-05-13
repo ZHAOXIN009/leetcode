@@ -1,0 +1,25 @@
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Build an Array With Stack Operations.
+Memory Usage: 8 MB, less than 100.00% of C++ online submissions for Build an Array With Stack Operations.
+```
+class Solution {
+public:
+    vector<string> buildArray(vector<int>& target, int n) {
+        int curr=1,i=0;
+        vector<string>res;
+        
+        while(curr<=n&&i<target.size()){
+            res.push_back("Push");
+            if(target[i]!=curr){
+                res.push_back("Pop");
+            }
+            else{
+                i++;
+                
+            }
+            curr++;
+            
+        }
+        return res;
+    }
+};
+```
