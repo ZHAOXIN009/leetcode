@@ -1,0 +1,21 @@
+Runtime: 0 ms, faster than 100.00% of C++ online submissions for Reach a Number.
+Memory Usage: 5.9 MB, less than 100.00% of C++ online submissions for Reach a Number.
+```
+class Solution {
+public:
+    int reachNumber(int target) {
+        target=abs(target);
+        int sum=0;
+        int step=0;
+        while(sum<target){
+            step++;
+            sum+=step;
+        }
+        while((sum-target)%2!=0){
+            step++;
+            sum+=step;
+        }
+        return step;
+    }
+};
+```
