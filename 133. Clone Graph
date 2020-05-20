@@ -1,0 +1,23 @@
+Runtime: 8 ms, faster than 93.54% of C++ online submissions for Clone Graph.
+Memory Usage: 9.1 MB, less than 100.00% of C++ online submissions for Clone Graph.
+```
+class Solution {
+public:
+    unordered_map<Node*, Node*>mymap;
+    Node* cloneGraph(Node* node) {
+        if(node==NULL)return NULL;
+        Node* my_new_node=new Node(node->val);
+        mymap[node]=my_new_node;
+        for(Node* temp: node->neighbors){
+            if(mymap.find(temp)!=mymap.end()){
+                my_new_node->neighbors.push_back(mymap[temp]);
+            }
+            else{
+                Node* nextNode=cloneGraph(temp);
+                my_new_node->neighbors.push_back(nextNode);
+            }
+        }
+        return my_new_node;
+    }
+};
+```
