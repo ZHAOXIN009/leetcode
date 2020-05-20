@@ -1,0 +1,28 @@
+Runtime: 72 ms, faster than 12.30% of C++ online submissions for Friend Circles.
+Memory Usage: 14.2 MB, less than 9.09% of C++ online submissions for Friend Circles.
+```
+class Solution {
+public:
+    int findCircleNum(vector<vector<int>>& M) {
+        int res=0;
+        for(int i=0; i<M.size(); ++i){
+            for(int j=0; j<M.size(); ++j){
+                if(M[i][j]==1){
+                    res++;
+                    traverse(i, j, M);
+                }
+            }
+        }
+        return res;
+    }
+    
+    
+    void traverse(int i, int j, vector<vector<int>>&M){
+        M[i][j]=0;
+        M[j][i]=0;
+        for(int k=0; k<M.size(); ++k){
+            if(M[j][k]==1)traverse(j, k, M);
+        }
+    }
+};
+```
