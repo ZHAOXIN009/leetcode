@@ -1,0 +1,19 @@
+Runtime: 5448 ms, faster than 14.83% of C++ online submissions for Longest Arithmetic Sequence.
+Memory Usage: 193.2 MB, less than 86.67% of C++ online submissions for Longest Arithmetic Sequence.
+```
+class Solution {
+public:
+    int longestArithSeqLength(vector<int>& A) {
+        int res=0;
+        unordered_map<int,unordered_map<int,int>>dp;
+        for(int i=0; i<A.size(); ++i){
+            for(int j=i+1; j<A.size(); ++j){
+               int temp=A[j]-A[i];
+                dp[temp][j]=dp[temp].count(i)?dp[temp][i]+1:2;
+                res=max(res, dp[temp][j]);
+            }
+        }
+        return res;
+    }
+};
+```
