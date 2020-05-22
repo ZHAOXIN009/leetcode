@@ -1,0 +1,28 @@
+Runtime: 36 ms, faster than 47.44% of C++ online submissions for Sort Characters By Frequency.
+Memory Usage: 8.7 MB, less than 100.00% of C++ online submissions for Sort Characters By Frequency.
+```
+class Solution {
+public:
+    string frequencySort(string s) {
+        unordered_map<char,int>mymap;
+        priority_queue<pair<int,int>,vector<pair<int,int>>>pq;
+        string res;
+        for(char c: s){
+            mymap[c]++;
+        }
+        for(auto temp: mymap){
+            pq.push(make_pair(temp.second,temp.first));
+        }
+        while(!pq.empty()){
+            char c=pq.top().second;
+            int time=pq.top().first;
+            pq.pop();
+            while(time){
+                time--;
+                res+=c;
+            }
+        }
+        return res;
+    }
+};
+```
