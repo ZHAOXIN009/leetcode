@@ -1,0 +1,26 @@
+Runtime: 8 ms, faster than 63.25% of C++ online submissions for Maximum Difference Between Node and Ancestor.
+Memory Usage: 11 MB, less than 90.91% of C++ online submissions for Maximum Difference Between Node and Ancestor.
+```
+class Solution {
+public:
+    int res=0;
+    int maxAncestorDiff(TreeNode* root) {
+        if(root==NULL)return 0;
+        int currmax=root->val;
+        int currmin=root->val;
+        traverse(root, currmax, currmin);
+        
+        return res;
+    }
+    
+    void traverse(TreeNode*root, int currmax, int currmin){
+        if(root==NULL)return ;
+        res=max(res, abs(currmax-root->val));
+        res=max(res, abs(currmin-root->val));
+        currmax=max(root->val, currmax);
+        currmin=min(currmin, root->val);
+        traverse(root->left, currmax, currmin);
+        traverse(root->right, currmax, currmin);
+    }
+};
+```
