@@ -1,0 +1,23 @@
+Runtime: 460 ms, faster than 17.99% of C++ online submissions for Count Number of Nice Subarrays.
+Memory Usage: 91 MB, less than 100.00% of C++ online submissions for Count Number of Nice Subarrays.
+```
+class Solution {
+public:
+    int numberOfSubarrays(vector<int>& nums, int k) {
+        unordered_map<int,int>mymap;
+        int currodd=0;
+        mymap[0]=1;
+        int res=0;
+        for(int i=0; i<nums.size(); ++i){
+            if(nums[i]%2==1){
+                currodd++;
+            }
+            if(currodd>=k){
+                res+=mymap[currodd-k];
+            }
+            mymap[currodd]++;
+        }
+        return res;
+    }
+};
+```
