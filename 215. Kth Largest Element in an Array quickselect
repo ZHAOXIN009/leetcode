@@ -1,0 +1,39 @@
+Runtime: 60 ms, faster than 17.62% of C++ online submissions for Kth Largest Element in an Array.
+Memory Usage: 148.6 MB, less than 6.06% of C++ online submissions for Kth Largest Element in an Array.
+```
+class Solution {
+public:
+    int findKthLargest(vector<int>& nums, int k) {
+        int left=0, right=nums.size()-1;
+        return qs(nums, k, left, right);
+    }
+    
+    int qs (vector<int>nums, int k, int left, int right){
+        if(left==right)return nums[left];
+        int currleft=left, currright=right;
+        int temp=nums[left];
+        while(currleft<currright){
+            while(currleft<currright&&nums[currright]>=temp){
+                currright--;
+            }
+            nums[currleft]=nums[currright];
+            if(currleft==currright)break;
+            currleft++;
+            while(currleft<currright&&nums[currleft]<temp){
+                currleft++;
+            }
+            nums[currright]=nums[currleft];
+            if(currleft==currright)break;
+            currright--;
+        }
+        nums[currleft]=temp;
+        if(right-currright+1==k)return nums[currright];
+        else if(right-currright+1>k){
+            return qs(nums, k , currright+1, right);
+        }
+        else{
+            return qs(nums, k-(right-currright+1), left, currleft-1);
+        }
+    }
+};
+```
