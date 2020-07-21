@@ -1,0 +1,41 @@
+Runtime: 124 ms, faster than 25.19% of C++ online submissions for Walls and Gates.
+Memory Usage: 22.2 MB, less than 18.64% of C++ online submissions for Walls and Gates.
+```
+class Solution {
+public:
+    void wallsAndGates(vector<vector<int>>& rooms) {
+        queue<vector<int>>qu;
+        for(int i=0; i<rooms.size(); ++i){
+            for(int j=0; j<rooms[0].size(); ++j){
+                if(rooms[i][j]==0){
+                    vector<int>temp={i, j, rooms[i][j]};
+                    qu.push(temp);
+                }
+            }
+        }
+        while(!qu.empty()){
+            vector<int>temp=qu.front();
+            qu.pop();
+            int i=temp[0], j=temp[1], k=temp[2];
+            if(i>0&&rooms[i-1][j]>k+1){
+                rooms[i-1][j]=k+1;
+                qu.push({i-1, j, k+1});
+            }
+            if(j>0&&rooms[i][j-1]>k+1){
+                rooms[i][j-1]=k+1;
+                qu.push({i, j-1, k+1});
+            }
+            if(i+1<rooms.size()&&rooms[i+1][j]>k+1){
+                rooms[i+1][j]=k+1;
+                qu.push({i+1, j, k+1});
+            }
+            if(j+1<rooms[0].size()&&rooms[i][j+1]>k+1){
+                rooms[i][j+1]=k+1;
+                qu.push({i, j+1, k+1});
+            }
+            
+        }
+        
+    }
+};
+```
