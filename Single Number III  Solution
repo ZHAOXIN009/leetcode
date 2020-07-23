@@ -1,0 +1,44 @@
+bad one 
+```
+class Solution {
+public:
+    vector<int> singleNumber(vector<int>& nums) {
+        unordered_map<int,int>mymap;
+        for(int i=0; i<nums.size(); ++i){
+            mymap[nums[i]]++;
+        }
+        vector<int>res;
+        for(auto it: mymap){
+            if(it.second==1){
+                res.push_back(it.first);
+            }
+        }
+        return res;
+    }
+};
+
+```
+
+good one
+```
+class Solution {
+public:
+    vector<int> singleNumber(vector<int>& nums) {
+        int num=0;
+        for(int i=0; i<nums.size(); ++i){
+            num^=nums[i];
+        }
+        num=num&(-num);
+        vector<int>res(2, 0);
+        for(int i=0; i<nums.size(); ++i){
+            if((nums[i]&num)==0){
+                res[0]^=nums[i];
+            }
+            else{
+                res[1]^=nums[i];
+            }
+        }
+        return res;
+    }
+};
+```
