@@ -1,0 +1,57 @@
+执行用时：
+20 ms
+, 在所有 C++ 提交中击败了
+25.18%
+的用户
+内存消耗：
+7.1 MB
+, 在所有 C++ 提交中击败了
+24.17%
+的用户
+```
+class Solution {
+public:
+    vector<int> partitionLabels(string S) {
+        unordered_map<char, int>mymap;
+        for(char c: S){
+            mymap[c]++;
+        }
+        int begin=0;
+        vector<int>res;
+        unordered_set<char>curr;
+        for(int i=0; i<S.size(); ++i){
+            mymap[S[i]]--;
+            if(mymap[S[i]]==0){
+                int cap=curr.size();
+                if(!curr.empty())
+                {
+                    
+                    for(char c: curr){
+                        if(mymap[c]!=0){
+                            break;
+                        }
+                        else{
+                            cap--;
+                            if(curr.empty()){
+                                break;
+                            }
+                        }
+                    }
+                }
+                if(cap==0){
+                    res.push_back(i-begin+1);
+                    begin=i+1;
+                    curr.clear();
+                }
+                
+            }
+            else{
+                if(curr.find(S[i])==curr.end()){
+                    curr.insert(S[i]);
+                }
+            }
+        }
+        return res;
+    }
+};
+````
