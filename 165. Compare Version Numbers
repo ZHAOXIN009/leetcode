@@ -1,0 +1,30 @@
+```
+class Solution {
+public:
+    int compareVersion(string version1, string version2) {
+        return comp(version1, version2, 0, 0);
+        
+    }
+    
+    int comp(string v1, string v2, int begin1, int begin2){
+        int first=0;
+        int second=0;
+        while(begin1<v1.size()&&v1[begin1]!='.'){
+            first=first*10+(v1[begin1]-'0');
+            begin1++;
+        }
+        while(begin2<v2.size()&&v2[begin2]!='.'){
+            second=second*10+(v2[begin2]-'0');
+            begin2++;
+        }
+        if(first==second){
+            if(begin1>=v1.size()&&begin2>=v2.size())return 0;
+            return comp(v1, v2, begin1+1, begin2+1);
+        }
+        else if(first<second){
+            return -1;
+        }
+        return 1;
+    }
+};
+```
