@@ -1,0 +1,26 @@
+```
+class Solution {
+public:
+    vector<vector<int>> combinationSum3(int k, int n) {
+        vector<vector<int>>res;
+        vector<int>row;
+        int curr=1;
+        int sum=0;
+        traverse(res, row, k, n, curr, sum);
+        return res;
+    }
+
+    void traverse(vector<vector<int>>&res, vector<int>row, int k, int n, int curr, int sum){
+        if(sum>n||k<0)return;
+        
+        for(int i=curr; i<=9; ++i){
+            row.push_back(i);
+            traverse(res, row, k-1, n, i+1, sum+i);
+            if(sum+i==n&&k==1){res.push_back(row);return;}
+            row.pop_back();
+
+
+        }
+    }
+};
+```
