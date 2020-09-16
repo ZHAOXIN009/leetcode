@@ -1,0 +1,16 @@
+```
+class Solution {
+public:
+    int minMoves(vector<int>& nums) {
+        int minnum=INT_MAX;
+        for(int i: nums){
+            minnum=min(minnum, i);
+        }
+        int res=0;
+        for(int i : nums){
+            res+=i-minnum;
+        }
+        return res;
+    }
+};
+```
