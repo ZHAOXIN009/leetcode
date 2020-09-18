@@ -1,0 +1,27 @@
+```
+class Solution {
+public:
+    vector<vector<int>> permuteUnique(vector<int>& nums) {
+        vector<vector<int>>res;
+        sort(nums.begin(), nums.end());
+        traverse(res, nums, 0);
+        return res;
+    }
+
+    void traverse(vector<vector<int>>&res, vector<int>nums, int begin){
+        if(begin==nums.size()-1){
+            res.push_back(nums);
+            return ;
+        }
+                              
+        for(int i=begin; i<nums.size(); ++i){
+            
+            if(i!=begin&&nums[i]==nums[begin])continue;
+            swap(nums[begin], nums[i]);
+            traverse(res, nums, begin+1);
+            
+        }
+
+    }
+};
+```
