@@ -1,0 +1,39 @@
+```
+class Solution {
+public:
+    vector<int> findMode(TreeNode* root) {
+        vector<int>res;
+        int currnum=0;
+        int currmax=0;
+        int count=0;
+        traverse(res, root, currnum, count, currmax);
+        return res;
+
+        
+    }
+
+
+    void traverse(vector<int>&res, TreeNode*root, int& currnum, int& count, int& currmax){
+        if(root==nullptr)return;
+        if(root->left){
+            traverse(res, root->left, currnum, count, currmax);
+        }
+        if(root->val==currnum){
+            count++;
+        }
+        else{
+            count=1;
+            currnum=root->val;
+        }
+        if(count==currmax){
+            res.push_back(currnum);
+        }
+        else if(count>currmax){
+            currmax=count;
+            res.clear();
+            res.push_back(currnum);
+        }
+        traverse(res, root->right, currnum, count, currmax);
+    }
+};
+```
