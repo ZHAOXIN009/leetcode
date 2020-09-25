@@ -1,0 +1,30 @@
+```
+class Solution {
+public:
+    int res=0;
+    unordered_set<string>myset;
+    int maxUniqueSplit(string s) {
+        int begin=0;
+        dfs(begin, s);
+        return res;
+    }
+
+    void dfs(int begin, string s){
+        if(myset.size()+s.size()-begin<res)return;
+        if(begin==s.size()){
+            int p=myset.size();
+            res=max(res, p);
+        }
+        for(int i=begin; i<s.size(); ++i){
+            string temp=s.substr(begin, i-begin+1);
+            if(myset.find(temp)!=myset.end()){
+                continue;
+            }
+            myset.insert(temp);
+            dfs(i+1, s);
+            myset.erase(temp);
+        }
+    }
+    
+};
+```
