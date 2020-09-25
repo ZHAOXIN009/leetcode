@@ -1,0 +1,41 @@
+```
+class Solution {
+public:
+    int maxProductPath(vector<vector<int>>& grid) {
+        vector<vector<pair<long long, long long>>>dp(grid.size(), vector<pair<long long,long long>>(grid[0].size(),{0,0}));
+        for(int i=0; i<grid.size(); ++i){
+            for(int j=0; j<grid[0].size(); ++j){
+                if(i==0){
+                    if(j==0){
+                        dp[i][j].first=grid[0][0];
+                        dp[i][j].second=grid[0][0];
+                    }
+                    else{
+                        dp[i][j].first=min(dp[i][j-1].first*grid[i][j], dp[i][j-1].second*grid[i][j]);
+                        dp[i][j].second=max(dp[i][j-1].first*grid[i][j], dp[i][j-1].second*grid[i][j]);
+                    }
+                }
+                else if(j==0){
+                    dp[i][j].first=min(dp[i-1][j].first*grid[i][j], dp[i-1][j].second*grid[i][j]);
+                    dp[i][j].second=max(dp[i-1][j].first*grid[i][j], dp[i-1][j].second*grid[i][j]);
+
+                }
+                else{
+                    long long a=min(dp[i][j-1].first*grid[i][j], dp[i][j-1].second*grid[i][j]);
+                    long long b=max(dp[i][j-1].first*grid[i][j], dp[i][j-1].second*grid[i][j]);
+                    long long c=min(dp[i-1][j].first*grid[i][j], dp[i-1][j].second*grid[i][j]);
+                    long long d=max(dp[i-1][j].first*grid[i][j], dp[i-1][j].second*grid[i][j]);
+                    dp[i][j].first=min({a, b, c, d});
+                    dp[i][j].second=max({a, b, c, d});
+
+                }
+
+            }
+        }
+        int mod=1e9+7;
+        int res=dp[grid.size()-1][grid[0].size()-1].second % mod;
+        return res>=0?res:-1;
+
+    }
+};
+```
