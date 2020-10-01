@@ -1,0 +1,42 @@
+```
+class Solution {
+public:
+    int minimumOperations(string leaves) {
+        vector<vector<int>>res(3, vector<int>(leaves.size(),0));
+        for(int i=0; i<3; ++i){
+            for(int j=0; j<leaves.size(); ++j){
+                 if(i==0){
+                     if(j==0){
+                         res[i][j]=leaves[0]=='r'?0:1;
+                     }
+                     else{
+                         int temp=leaves[j]=='r'?0:1;
+                         res[i][j]=res[i][j-1]+temp;
+                     }
+                 }
+                 else if(i==1){
+                     if(j<1){
+                         res[i][j]=INT_MAX;
+                     }
+                     else{
+                         int temp=leaves[j]=='r'?1:0;
+                         res[i][j]=min(res[i][j-1], res[i-1][j-1])+temp;
+                     }
+                 }
+                 else{
+                     if(j<2){
+                         res[i][j]=INT_MAX;
+                        
+                     }
+                     else{
+                         int temp=leaves[j]=='y'?1:0;
+                         res[i][j]=min(res[i][j-1],res[i-1][j-1])+temp;
+                     }
+                 }
+
+            }
+        }
+        return min({res[2][leaves.size()-1]});
+    }
+};
+```
