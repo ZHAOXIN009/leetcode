@@ -1,0 +1,20 @@
+```
+class Solution {
+public:
+    void rotate(vector<vector<int>>& matrix) {
+        int row=matrix.size(), col=matrix[0].size();
+        for(int i=0; i<matrix.size(); ++i){
+            for(int j=0; j<col/2; ++j){
+                swap(matrix[i][j], matrix[i][col-1-j]);
+            }
+        }
+
+        for(int i=0; i<matrix.size(); ++i){
+            for(int j=0; j<row-i-1; ++j){
+                swap(matrix[i][j], matrix[row-j-1][row-i-1]);
+                
+            }
+        }
+    }
+};
+```
