@@ -1,0 +1,19 @@
+```
+class Solution {
+public:
+    bool canPermutePalindrome(string s) {
+        unordered_map<char,int> hash;
+        for(char c: s){
+            hash[c]++;
+        }
+        bool single=false;
+        for(auto i: hash){
+            if(i.second%2==1){
+                if(single)return false;
+                single=true;
+            }
+        }
+        return true;
+    }
+};
+```
