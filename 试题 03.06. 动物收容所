@@ -1,0 +1,66 @@
+```
+class AnimalShelf {
+public:
+    AnimalShelf() {
+
+    }
+    queue<vector<int>>cat, dog;
+    vector<int>nullres={-1,-1};
+    void enqueue(vector<int> animal) {
+        if(animal[1]==0){
+            cat.push(animal);
+        }
+        else{
+            dog.push(animal);
+        }
+    }
+    
+    vector<int> dequeueAny() {
+        if(cat.empty()&&dog.empty())return nullres;
+        if(cat.empty()){
+            vector<int>res=dog.front();
+            dog.pop();
+            return res;
+        }
+        if(dog.empty()){
+            
+            vector<int>res=cat.front();
+            cat.pop();
+            return res;
+        }
+        vector<int>c=cat.front();
+        vector<int>d=dog.front();
+        if(c[0]<d[0]){
+            cat.pop();
+            return c;
+        }
+        else{
+            dog.pop();
+            return d;
+        }
+    }
+    
+    vector<int> dequeueDog() {
+        if(dog.empty())return nullres;
+        vector<int>res=dog.front();
+        dog.pop();
+        return res;
+    }
+    
+    vector<int> dequeueCat() {
+        if(cat.empty())return nullres;
+        vector<int>res=cat.front();
+        cat.pop();
+        return res;
+    }
+};
+
+/**
+ * Your AnimalShelf object will be instantiated and called as such:
+ * AnimalShelf* obj = new AnimalShelf();
+ * obj->enqueue(animal);
+ * vector<int> param_2 = obj->dequeueAny();
+ * vector<int> param_3 = obj->dequeueDog();
+ * vector<int> param_4 = obj->dequeueCat();
+ */
+ ```
