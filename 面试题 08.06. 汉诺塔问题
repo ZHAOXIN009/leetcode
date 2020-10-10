@@ -1,0 +1,20 @@
+```
+class Solution {
+public:
+    void hanota(vector<int>& A, vector<int>& B, vector<int>& C) {
+        help(A.size(), A, B, C);
+        
+    }
+
+    void help(int n, vector<int>&A, vector<int>& B, vector<int>& C ){
+        if(n==0){
+           
+            return;
+        }
+        help(n-1, A, C, B);
+        C.push_back(A.back());
+        A.pop_back();
+        help(n-1, B, A, C);
+    }
+};
+```
