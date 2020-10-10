@@ -1,0 +1,33 @@
+```
+class Solution {
+public:
+    vector<ListNode*> listOfDepth(TreeNode* tree) {
+        queue<TreeNode*>qu;
+        vector<ListNode*>res;
+        if(tree==nullptr){
+            return res;
+        }
+        qu.push(tree);
+        while(qu.size()){
+            int n=qu.size();
+            ListNode*pre=new ListNode(0);
+            ListNode*head=pre;
+            while(n){
+                pre->next=new ListNode(qu.front()->val);
+                pre=pre->next;
+                if(qu.front()->left){
+                    qu.push(qu.front()->left);
+                }
+                if(qu.front()->right){
+                    qu.push(qu.front()->right);
+                }
+                qu.pop();
+                n--;
+
+            }
+            res.push_back(head->next);
+        }
+        return res;
+    }
+};
+```
