@@ -1,0 +1,27 @@
+```
+class Solution {
+public:
+    vector<string> generateParenthesis(int n) {
+        int open=0, close=0;
+        vector<string>res;
+        string curr;
+        traverse(res, open, close, n, curr);
+        return res;
+    }
+
+    void traverse(vector<string>&res, int open, int close, int n, string curr){
+        if(close==n){
+            res.push_back(curr);
+            return;
+        }
+        if(open>close){
+            traverse(res, open, close+1, n, curr+')');
+        }
+        if(open<n){
+            traverse(res, open+1, close, n, curr+'(');
+        }
+    }
+
+
+};
+```
