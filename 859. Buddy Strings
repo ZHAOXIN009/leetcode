@@ -1,0 +1,38 @@
+```
+class Solution {
+public:
+    bool buddyStrings(string A, string B) {
+        if(A.size()!=B.size())return false;
+        int left=0, right=A.size()-1;
+        for(; left<A.size(); ++left){
+            if(A[left]!=B[left]){
+                break;
+            }
+        }
+        for(; right>=0; --right){
+            if(A[right]!=B[right]){
+                break;
+            }
+        }
+        if(right==-1&&left==A.size()){
+            int hash[26]={0};
+            for(char c: A){
+                hash[c-'a']++;
+                if(hash[c-'a']>1)return true;
+            }
+            return false;
+        }
+        if(left!=right){
+            swap(A[left], A[right]);
+            return A==B;
+        }
+        int curr=0;
+        for(char c: A){
+            if(c==A[left]){
+                curr++;
+            }
+        }
+        return curr>1;
+    }
+};
+```
