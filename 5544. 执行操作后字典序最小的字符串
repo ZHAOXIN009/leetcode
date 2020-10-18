@@ -1,0 +1,50 @@
+```
+class Solution {
+public:
+    unordered_set<string>myset;
+    string res;
+    string findLexSmallestString(string s, int a, int b) {
+        res=s;
+        myset.insert(s);
+        traverse(s, a, b);
+        return res;
+    }
+    
+    void traverse(string s, int a, int b){
+        
+        
+        
+        
+        
+        string temp2=s;
+        do{
+            for(int i=1; i<temp2.size(); i+=2){
+                temp2[i]+=a;
+                if(temp2[i]>'9'){
+                    temp2[i]-=10;
+                }
+            }
+            if(myset.find(temp2)==myset.end()){
+                myset.insert(temp2);
+                if(temp2<res){
+                    res=temp2;
+                }
+                traverse(temp2, a, b);
+            }
+            else{
+                break;
+            }
+        }while(temp2!=s);
+        
+        string temp1=s.substr(b)+s.substr(0, b);
+        if(myset.find(temp1)==myset.end()){
+            myset.insert(temp1);
+            if(temp1<res){
+                res=temp1;
+            }
+            traverse(temp1, a, b);
+        }
+        
+    }
+};
+```
