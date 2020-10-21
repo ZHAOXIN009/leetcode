@@ -1,0 +1,40 @@
+```
+class Solution {
+public:
+    vector<int> asteroidCollision(vector<int>& asteroids) {
+        vector<int>res;
+        int begin=0;
+        traverse(asteroids, res, begin);
+        return res;
+    }
+    
+    void traverse(vector<int>&asteroids, vector<int>&res, int begin){
+        if(begin==asteroids.size())return ;
+        if(res.empty()){
+            res.push_back(asteroids[begin]);
+            traverse(asteroids, res, begin+1);
+            return;
+        }
+        
+        if(asteroids[begin]>0){
+            res.push_back(asteroids[begin]);
+        }
+        else{
+            while(res.size()>0&&res.back()>0&&res.back()<abs(asteroids[begin])){
+                res.pop_back();
+            }
+            if(res.size()>0&&res.back()>0&&res.back()>abs(asteroids[begin])){
+                traverse(asteroids, res, begin+1);
+                return;
+            }
+            if(res.size()>0&&res.back()>0&&res.back()==abs(asteroids[begin])){
+                res.pop_back();
+                traverse(asteroids, res, begin+1);
+                return;
+            }
+            res.push_back(asteroids[begin]);
+        }
+        traverse(asteroids, res, begin+1);
+    }
+};
+```
