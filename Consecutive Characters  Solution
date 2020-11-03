@@ -1,0 +1,21 @@
+```
+class Solution {
+public:
+    int maxPower(string s) {
+        int res=0;
+        char curr='.';
+        for(int i=0; i<s.size(); ++i){
+            curr=s[i];
+            int currnum=0;
+            while(i<s.size()&&s[i]==curr){
+                i++;
+                currnum++;
+                res=max(res, currnum);
+            }
+            if(i==s.size())return res;
+            i--;
+        }
+        return res;
+    }
+};
+```
