@@ -1,0 +1,34 @@
+```
+class Solution {
+public:
+    int minDeletions(string s) {
+        int res=0;
+        unordered_map<char, int>mymap;
+        for(char c: s){
+            mymap[c]++;
+
+        }
+        unordered_map<int, int>nums;
+        for(auto temp: mymap){
+            nums[temp.second]++;
+        }
+        for(auto temp: nums){
+            if(temp.second==1)continue;
+            int n=temp.second-1;
+            while(n!=0){
+                n--;
+                int curr=temp.first-1;
+                while(curr>0&&nums.find(curr)!=nums.end()){
+                    curr--;
+                }
+                nums[curr]=1;
+                res+=temp.first-curr;
+            }
+            
+            
+            
+        }
+        return res;
+    }
+};
+```
