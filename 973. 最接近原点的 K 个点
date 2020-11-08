@@ -1,0 +1,33 @@
+```
+class Solution {
+    public:
+    class comp{
+        public:
+        bool operator()(const pair<int,int>&a, const pair<int,int>&b){
+            return a.first*a.first+a.second*a.second<b.first*b.first+b.second*b.second;
+        }
+    };
+public:
+    vector<vector<int>> kClosest(vector<vector<int>>& points, int K) {
+        priority_queue<pair<int,int>,vector<pair<int,int>>, comp>pq;
+        for(vector<int>temp: points){
+            pq.push(make_pair(temp[0],temp[1]));
+            if(pq.size()>K){
+                pq.pop();
+            }
+            
+        }
+        vector<vector<int>>res;
+        while(!pq.empty()){
+            vector<int>row;
+            row.push_back(pq.top().first);
+            row.push_back(pq.top().second);
+            res.push_back(row);
+            pq.pop();
+
+        }
+        return res;
+        
+    }
+};
+```
