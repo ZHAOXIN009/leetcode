@@ -1,0 +1,32 @@
+```
+class Solution {
+public:
+    bool runable=false;
+    int canCompleteCircuit(vector<int>& gas, vector<int>& cost) {
+        
+        for(int i=0; i<gas.size(); ++i){
+            trans(gas, cost, i);
+            if(runable)return i;
+        }
+        return -1;
+    }
+
+    void trans(vector<int>& gas, vector<int>& cost, int i){
+        int curr=i;
+        int currgas=0;
+        
+        do{
+            currgas+=gas[i];
+            currgas-=cost[i];
+            if(currgas<0){
+                return;
+            }
+            i++;
+            if(i>=gas.size()){
+                i-=gas.size();
+            }
+        }while(curr!=i);
+        runable=true;
+    }
+};
+````
