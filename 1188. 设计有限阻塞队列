@@ -1,0 +1,36 @@
+```
+class BoundedBlockingQueue {
+public:
+    mutex m;
+    condition_variable con;
+    deque<int>de;
+    int limit;
+    BoundedBlockingQueue(int capacity) {
+        limit=capacity;
+    }
+    
+    void enqueue(int element) {
+        unique_lock<mutex>uni(m);
+        con.wait(uni, [this](){
+            return de.size()<limit;
+        });
+        de.push_front(element);
+        con.notify_all();
+    }
+    
+    int dequeue() {
+        unique_lock<mutex>uni(m);
+        con.wait(uni, [this](){
+            return !de.empty();
+        });
+        int res=de.back();
+        de.pop_back();
+        con.notify_all();
+        return res;
+    }
+    
+    int size() {
+        return de.size();
+    }
+};
+```
