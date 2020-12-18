@@ -1,0 +1,28 @@
+```
+class Solution {
+public:
+    vector<int> singleNumbers(vector<int>& nums) {
+        int n=1;
+        int curr=0;
+        for(int i: nums){
+            curr^=i;
+        }
+        while((n&curr)==0){
+            n=n<<1;
+        }
+        int a=0, b=0;
+        for(int i: nums){
+            if(n&i){
+                a^=i;
+            }
+            else{
+                b^=i;
+            }
+        }
+        vector<int>res;
+        res.push_back(a);
+        res.push_back(b);
+        return res;
+    }
+};
+```
