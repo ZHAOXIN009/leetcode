@@ -1,0 +1,33 @@
+```
+class Solution {
+public:
+    int candy(vector<int>& ratings) {
+        if(ratings.size()<=1)return ratings.size();
+        vector<int>t(ratings.size(), 1);
+        if(ratings[0]<ratings[1]){right(ratings, t, 1, 2); }
+        if(ratings[t.size()-1]<ratings[t.size()-2]){ left(ratings, t, t.size()-2, 2);}
+        for(int i=1; i<t.size()-1; ++i){
+            if(ratings[i]<ratings[i-1]||ratings[i]<ratings[i+1]){
+                
+                left(ratings, t, i-1, 2);
+                right(ratings, t, i+1, 2);
+            }
+        }
+        int res=0;
+        for(int i:t){
+            res+=i;
+        }
+        return res;
+    }
+
+    void left(vector<int>&ratings, vector<int>&t, int i, int val){
+        if(i<0||ratings[i]<=ratings[i+1]||t[i]>=val)return;
+        t[i]=val;
+        left(ratings, t, i-1, val+1);
+    }
+    void right(vector<int>&ratings, vector<int>&t, int i, int val){
+        if(i>t.size()-1||ratings[i]<=ratings[i-1]||t[i]>=val)return;
+        t[i]=val;
+        right(ratings, t, i+1, val+1);
+    }
+};```
